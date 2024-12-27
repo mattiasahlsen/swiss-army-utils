@@ -1,4 +1,4 @@
-import { asyncMap } from "./asyncMap.js";
+import { asyncMap } from './asyncMap.js';
 
 export const asyncFlatMap = async <T, R>(
   array: T[] | AsyncIterable<T>,
