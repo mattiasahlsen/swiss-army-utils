@@ -1,6 +1,6 @@
 {
   "name": "swiss-army-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "General typescript utils.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,7 +19,6 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
-  "type": "module",
   "keywords": [
     "typescript",
     "utilities"
