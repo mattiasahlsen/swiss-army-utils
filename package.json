@@ -2,7 +2,12 @@
   "name": "swiss-army-utils",
   "version": "0.1.0",
   "description": "General typescript utils.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "private": false,
   "scripts": {
     "test": "jest",
     "build": "rimraf dist && tsc",
