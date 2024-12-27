@@ -11,7 +11,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint ./src",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc --project tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
