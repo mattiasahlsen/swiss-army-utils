@@ -7,11 +7,14 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    "./*": "./dist/*"
+  },
   "private": false,
   "scripts": {
     "test": "jest",
     "lint": "eslint ./src",
-    "build": "rimraf dist && tsc --project tsconfig.build.json",
+    "build": "rimraf dist && tsc --build tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",

@@ -1,4 +1,4 @@
-import { firstOrThrow } from "./firstOrThrow.js";
+import { firstOrThrow } from '../find/firstOrThrow.js';
 
 type Handler<TParams> = (params: TParams) => Promise<void> | void;
 
@@ -21,7 +21,7 @@ const callInOrderWithErrorHandling = async <TParams>(
       throw firstOrThrow(errors);
     }
 
-    throw new AggregateError(errors, "Some handlers failed");
+    throw new AggregateError(errors, 'Some handlers failed');
   }
 };
 
@@ -45,7 +45,7 @@ export type Subject<T> = ReturnType<typeof createSubject<T>>;
 
 export const mergeSubjects = <THandlerParams>(
   subjects: Subject<THandlerParams>[]
-): Omit<Subject<THandlerParams>, "emit"> => {
+): Omit<Subject<THandlerParams>, 'emit'> => {
   return {
     subscribe: (handler: Handler<THandlerParams>) => {
       const unsubscribes = subjects.map((subject) =>
