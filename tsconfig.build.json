@@ -6,9 +6,11 @@
   },
   "exclude": ["src/**/*.test.ts"],
   "references": [
+    { "path": "./src/compare" },
     { "path": "./src/misc" },
     { "path": "./src/error" },
     { "path": "./src/find" },
-    { "path": "./src/reduce" }
+    { "path": "./src/reduce" },
+    { "path": "./src/object" }
   ]
 }

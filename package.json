@@ -13,6 +13,7 @@
   "private": false,
   "scripts": {
     "test": "jest",
+    "test:types": "tsc --noEmit",
     "lint": "eslint ./src",
     "build": "rimraf dist && tsc --build tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
@@ -37,6 +38,7 @@
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.2.5",
+    "type-fest": "^4.31.0",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.2"
   }
