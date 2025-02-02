@@ -10,7 +10,7 @@
     { "path": "./src/misc" },
     { "path": "./src/error" },
     { "path": "./src/find" },
-    { "path": "./src/reduce" },
+    { "path": "./src/map-reduce" },
     { "path": "./src/object" }
   ]
 }
