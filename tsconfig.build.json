@@ -12,6 +12,7 @@
     { "path": "./src/find" },
     { "path": "./src/map-reduce" },
     { "path": "./src/object" },
-    { "path": "./src/functions" }
+    { "path": "./src/functions" },
+    { "path": "./src/filter" }
   ]
 }
