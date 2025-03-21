@@ -11,6 +11,7 @@
     { "path": "./src/error" },
     { "path": "./src/find" },
     { "path": "./src/map-reduce" },
-    { "path": "./src/object" }
+    { "path": "./src/object" },
+    { "path": "./src/functions" }
   ]
 }
