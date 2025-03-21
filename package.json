@@ -18,7 +18,7 @@
     "test": "jest",
     "test:types": "tsc --noEmit",
     "lint": "eslint ./src",
-    "build": "rimraf dist && tsc --build tsconfig.build.json",
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",

@@ -2,17 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "declaration": true
   },
-  "exclude": ["src/**/*.test.ts"],
-  "references": [
-    { "path": "./src/compare" },
-    { "path": "./src/misc" },
-    { "path": "./src/error" },
-    { "path": "./src/find" },
-    { "path": "./src/map-reduce" },
-    { "path": "./src/object" },
-    { "path": "./src/functions" },
-    { "path": "./src/filter" }
-  ]
+  "exclude": ["src/**/*.test.ts"]
 }
