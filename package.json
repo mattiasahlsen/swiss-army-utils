@@ -1,28 +1,29 @@
 {
   "name": "swiss-army-utils",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "General typescript utils.",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "module": "dist/index.js",
   "files": [
     "dist"
   ],
   "exports": {
-    ".": "./dist/index.js",
-    "./*": "./dist/*"
+    "./*": {
+      "default": "./dist/esm/*.js",
+      "import": "./dist/esm/*.js",
+      "module": "./dist/esm/*.js",
+      "require": "./dist/cjs/*.js",
+      "types": "./dist/types/*.d.ts"
+    }
   },
   "private": false,
   "scripts": {
     "test": "jest",
     "test:types": "tsc --noEmit",
     "lint": "eslint ./src",
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "build": "rimraf dist && tsc -b tsconfig.esm.build.json -b tsconfig.cjs.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
+    "prepare": "npm test && npm run lint && npm run build",
+    "preversion": "npm run prepare",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
