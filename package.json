@@ -1,6 +1,6 @@
 {
   "name": "swiss-army-utils",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "General typescript utils.",
   "type": "module",
   "files": [
@@ -11,8 +11,7 @@
       "default": "./dist/esm/*.js",
       "import": "./dist/esm/*.js",
       "module": "./dist/esm/*.js",
-      "require": "./dist/cjs/*.js",
-      "types": "./dist/types/*.d.ts"
+      "require": "./dist/cjs/*.js"
     }
   },
   "private": false,

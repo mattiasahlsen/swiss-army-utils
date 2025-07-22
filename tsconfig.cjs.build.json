@@ -6,8 +6,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": "./dist/cjs",
-    "tsBuildInfoFile": "./dist/cjs/.tsbuildinfo",
-    "declaration": false
+    "tsBuildInfoFile": "./dist/cjs/.tsbuildinfo"
   },
   "exclude": ["src/**/*.test.ts"]
 }
