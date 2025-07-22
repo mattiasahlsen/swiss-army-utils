@@ -46,4 +46,32 @@ describe('asTuple', () => {
     expect(result).toEqual(['single']);
     expect(result).toBe(input);
   });
+
+  test('preserves TypeScript tuple types correctly', () => {
+    // Test that asTuple preserves exact literal types as tuples
+    asTuple([1, 2]) satisfies [1, 2];
+    asTuple(['a', 'b', 'c']) satisfies ['a', 'b', 'c'];
+    asTuple([true, false]) satisfies [true, false];
+    asTuple([1, 'string', true]) satisfies [1, 'string', true];
+    
+    // Test with const assertion to ensure literal types
+    const numberTuple = asTuple([1, 2, 3] as const);
+    numberTuple satisfies readonly [1, 2, 3];
+    
+    const mixedTuple = asTuple(['hello', 42, true] as const);
+    mixedTuple satisfies readonly ['hello', 42, true];
+    
+    // Test empty tuple
+    asTuple([]) satisfies [];
+    
+    // Test single element tuple
+    asTuple([42]) satisfies [42];
+    
+    // Test with objects preserving exact types
+    const obj = { x: 1, y: 2 } as const;
+    asTuple([obj]) satisfies [typeof obj];
+    
+    // Test nested arrays as tuples
+    asTuple([[1, 2], [3, 4]]) satisfies [[1, 2], [3, 4]];
+  });
 });
