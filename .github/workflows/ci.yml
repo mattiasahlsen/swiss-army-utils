@@ -1,4 +1,4 @@
-name: CI
+name: CI Checks
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ env:
   NODE_VERSION: '22.15.1' # set this to the node version to use (e.g. '8.x', '10.x', '12.x')
 
 jobs:
-  build:
+  lint-build-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
