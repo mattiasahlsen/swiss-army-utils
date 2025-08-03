@@ -1,3 +1,25 @@
+/**
+ * Asynchronously splits an async iterable into batches based on weighted sizes.
+ * Items are grouped into batches where the total weight doesn't exceed the specified batch size.
+ * This is an async generator that yields batches as they are formed.
+ *
+ * @param items - The async iterable to split into batches.
+ * @param batchSize - The maximum total weight allowed per batch.
+ * @param getWeight - Function to calculate the weight of each item.
+ * @yields Arrays representing batches with total weight ≤ batchSize.
+ *
+ * @example
+ * ```ts
+ * async function* generateItems() {
+ *   yield 'a'; yield 'bb'; yield 'ccc'; yield 'dddd';
+ * }
+ * 
+ * for await (const batch of batchAsyncIterableByWeights(generateItems(), 5, item => item.length)) {
+ *   console.log(batch);
+ * }
+ * // Outputs: ['a', 'bb'], ['ccc'], ['dddd']
+ * ```
+ */
 export const batchAsyncIterableByWeights = async function* <T>(
   items: AsyncIterable<T>,
   batchSize: number,
