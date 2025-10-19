@@ -1,0 +1,18 @@
+{
+  "name": "node-typescript-example",
+  "version": "1.0.0",
+  "description": "Example project using swiss-army-utils",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "swiss-army-utils": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}
