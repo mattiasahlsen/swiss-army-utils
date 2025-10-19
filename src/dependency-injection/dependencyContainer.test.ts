@@ -4,11 +4,11 @@ import { createDependencyContainer } from './dependencyContainer.js';
 describe('createDependencyContainer', () => {
   test('can create a simple dependency container with both sync and async dependencies', () => {
     const container = createDependencyContainer({
-      createDependencies: () => ({ foo: 'bar' }),
+      createSyncDependencies: () => ({ foo: 'bar' }),
       createAsyncDependencies: () => Promise.resolve({ baz: 'qux' }),
     });
 
-    expect(container.getDependencies() satisfies { foo: string }).toEqual({
+    expect(container.getSyncDependencies() satisfies { foo: string }).toEqual({
       foo: 'bar',
     });
     expect(
@@ -18,10 +18,10 @@ describe('createDependencyContainer', () => {
 
   test('can create a dependency container without async dependencies', () => {
     const container = createDependencyContainer({
-      createDependencies: () => ({ foo: 'bar' }),
+      createSyncDependencies: () => ({ foo: 'bar' }),
     });
 
-    expect(container.getDependencies() satisfies { foo: string }).toEqual({
+    expect(container.getSyncDependencies() satisfies { foo: string }).toEqual({
       foo: 'bar',
     });
     expect(
@@ -33,7 +33,7 @@ describe('createDependencyContainer', () => {
     const container = createDependencyContainer({
       createAsyncDependencies: () => Promise.resolve({ baz: 'qux' }),
     });
-    expect(container.getDependencies() satisfies EmptyObject).toEqual({});
+    expect(container.getSyncDependencies() satisfies EmptyObject).toEqual({});
     expect(
       container.getAsyncDependencies() satisfies Promise<{ baz: string }>
     ).resolves.toEqual({ baz: 'qux' });
@@ -41,7 +41,7 @@ describe('createDependencyContainer', () => {
 
   test('can create dependency container without any dependencies', () => {
     const container = createDependencyContainer({});
-    expect(container.getDependencies() satisfies EmptyObject).toEqual({});
+    expect(container.getSyncDependencies() satisfies EmptyObject).toEqual({});
     expect(
       container.getAsyncDependencies() satisfies Promise<EmptyObject>
     ).resolves.toEqual({});
@@ -49,28 +49,28 @@ describe('createDependencyContainer', () => {
 
   test('can create a complex dependency container in multiple steps', () => {
     const container = createDependencyContainer({
-      createDependencies: () => ({ foo: 'bar' }),
+      createSyncDependencies: () => ({ foo: 'bar' }),
       createAsyncDependencies: () => Promise.resolve({ baz: 'qux' }),
     })
       .extend({
-        createDependencies: (prevContainer) => ({
-          foo2: `${prevContainer.getDependencies().foo}-beta`,
+        createSyncDependencies: (prevContainer) => ({
+          foo2: `${prevContainer.getSyncDependencies().foo}-beta`,
         }),
         createAsyncDependencies: async (prevContainer) => ({
           baz2: `${(await prevContainer.getAsyncDependencies()).baz}-delta`,
         }),
       })
       .extend({
-        createDependencies: (prevContainer) => ({
-          foo3: `${prevContainer.getDependencies().foo2}-gamma`,
+        createSyncDependencies: (prevContainer) => ({
+          foo3: `${prevContainer.getSyncDependencies().foo2}-gamma`,
         }),
         createAsyncDependencies: async (prevContainer) => ({
           baz3: `${(await prevContainer.getAsyncDependencies()).baz2}-epsilon`,
         }),
       })
       .extend({
-        createDependencies: (prevContainer) => ({
-          foo4: `${prevContainer.getDependencies().foo3}-zeta`,
+        createSyncDependencies: (prevContainer) => ({
+          foo4: `${prevContainer.getSyncDependencies().foo3}-zeta`,
         }),
       })
       .extend({
@@ -105,7 +105,7 @@ describe('createDependencyContainer', () => {
       baz4: 'qux-delta-epsilon-eta',
     };
 
-    expect(container.getDependencies() satisfies SyncDependencies).toEqual(
+    expect(container.getSyncDependencies() satisfies SyncDependencies).toEqual(
       syncDependencies
     );
     expect(
