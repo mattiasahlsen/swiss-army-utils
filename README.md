@@ -805,10 +805,12 @@ await subject2.emit('From subject2');
 - `npm run build` - Build the library
 - `npm run format` - Format code with Prettier
 - `npm run updateReadme` - Generate README documentation from JSDoc comments
+- `npm run checks` - Check format, run lint, tests and build
+- `npm run dev` - Format files, lint, test, build and regenerate README file
 
 ### Publish new version of npm package
 
-- Run `npm version [patch | minor | major]`
+- Run `npm run new-version [patch | minor | major]`
 - Run `npm publish --dry-run` and verify output
 - Run `npm publish`
 
