@@ -10,11 +10,11 @@
  * @example
  * ```ts
  * const users = [{ name: 'John', age: 30 }, { name: 'Jane', age: 25 }];
- * 
+ *
  * // Sort by name ascending
- * toSorted(users, user => user.name); 
+ * toSorted(users, user => user.name);
  * // returns [{ name: 'Jane', age: 25 }, { name: 'John', age: 30 }]
- * 
+ *
  * // Sort by age descending
  * toSorted(users, user => user.age, 'desc');
  * // returns [{ name: 'John', age: 30 }, { name: 'Jane', age: 25 }]

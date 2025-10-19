@@ -100,10 +100,10 @@ describe('numberAsStringSchema', () => {
     // Leading zeros
     expect(numberAsStringSchema.parse('007')).toBe(7);
     expect(numberAsStringSchema.parse('00.5')).toBe(0.5);
-    
+
     // Very small numbers
     expect(numberAsStringSchema.parse('0.0001')).toBe(0.0001);
-    
+
     // Very large numbers (within JS safe integer range)
     expect(numberAsStringSchema.parse('999999999999999')).toBe(999999999999999);
   });
