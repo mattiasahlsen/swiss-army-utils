@@ -20,76 +20,116 @@ import { sleep } from 'swiss-army-utils/functions/sleep';
 
 ## API Documentation
 
-### compare
+## Constants
 
-Utilities for comparing and checking equality of values.
+<dl>
+<dt><a href="#findOrThrow">findOrThrow</a> ⇒</dt>
+<dd><p>Finds the first item in the array that matches the predicate, throwing an error if no match is found.</p>
+</dd>
+<dt><a href="#firstOrThrow">firstOrThrow</a> ⇒</dt>
+<dd><p>Returns the first item in the array, throwing an error if the array is empty.</p>
+</dd>
+<dt><a href="#indexOrThrow">indexOrThrow</a> ⇒</dt>
+<dd><p>Returns the item at the specified index in the array, throwing an error if the index is out of bounds.</p>
+</dd>
+<dt><a href="#makeThrottled">makeThrottled</a> ⇒</dt>
+<dd><p>Creates a throttled version of a function that enforces a minimum delay between executions.
+Multiple calls made during the delay period will share the same promise and return the same result.
+After the delay period, subsequent calls will trigger a new execution.</p>
+</dd>
+<dt><a href="#sleep">sleep</a> ⇒</dt>
+<dd><p>Asynchronously pauses execution for a specified duration.
+Returns a promise that resolves after the given number of milliseconds.</p>
+</dd>
+<dt><a href="#asyncFlatMap">asyncFlatMap</a> ⇒</dt>
+<dd><p>Asynchronously maps over an array or async iterable and flattens the results.
+Equivalent to calling asyncMap followed by Array.flat().
+The mapping is performed sequentially to maintain order.</p>
+</dd>
+<dt><a href="#asyncMap">asyncMap</a> ⇒</dt>
+<dd><p>Asynchronously maps over an array or async iterable, applying an async mapper function to each item.
+The mapping is performed sequentially (not in parallel) to maintain order and avoid overwhelming resources.</p>
+</dd>
+<dt><a href="#asyncReduce">asyncReduce</a> ⇒</dt>
+<dd><p>Asynchronously reduces an array to a single value using an async reducer function.
+The reduction is performed sequentially, processing one item at a time.</p>
+</dd>
+<dt><a href="#batchArray">batchArray</a> ⇒</dt>
+<dd><p>Splits an array into smaller arrays (batches) of a specified size.
+Each batch will contain at most <code>batchSize</code> items.</p>
+</dd>
+<dt><a href="#batchArrayByWeights">batchArrayByWeights</a> ⇒</dt>
+<dd><p>Splits an array into smaller arrays (batches) based on weighted sizes.
+Items are grouped into batches where the total weight doesn&#39;t exceed the specified batch size.</p>
+</dd>
+<dt><a href="#batchAsyncIterableByWeights">batchAsyncIterableByWeights</a></dt>
+<dd><p>Asynchronously splits an async iterable into batches based on weighted sizes.
+Items are grouped into batches where the total weight doesn&#39;t exceed the specified batch size.
+This is an async generator that yields batches as they are formed.</p>
+</dd>
+<dt><a href="#pluckIds">pluckIds</a> ⇒</dt>
+<dd><p>Extracts unique IDs from an array of objects using an ID getter function.
+The function flattens nested arrays up to 10 levels deep, filters out null/undefined values,
+and returns a deduplicated array of IDs.</p>
+</dd>
+<dt><a href="#createRange">createRange</a> ⇒</dt>
+<dd><p>Creates an array of consecutive integers from 0 to length-1.</p>
+</dd>
+<dt><a href="#createSubject">createSubject</a> ⇒</dt>
+<dd><p>Creates a subject (observable) for event-driven programming.
+Allows subscribers to listen for events and emit events to all subscribers.
+Handlers are called in order, and all handlers are executed even if some fail.</p>
+</dd>
+<dt><a href="#mergeSubjects">mergeSubjects</a> ⇒</dt>
+<dd><p>Merges multiple subjects into a single subscribable subject.
+A handler subscribed to the merged subject will receive events from all source subjects.
+Note: The merged subject cannot emit events, only subscribe to them.</p>
+</dd>
+</dl>
 
-### dependency-injection
+## Functions
 
-Tools for managing and organizing application dependencies.
-
-### error
-
-Error handling utilities and custom error classes.
-
-### filter
-
-Functions for filtering and type-guarding values.
-
-<a name="filterUnique"></a>
-
-## filterUnique ⇒
-Filters an array to keep only unique items based on a key extraction function.
-When duplicate keys are found, the last occurrence is kept.
-
-**Kind**: global constant  
-**Returns**: An array containing only unique items based on the extracted keys.  
-
-| Param | Description |
-| --- | --- |
-| items | The array of items to filter. |
-| getKey | Function that extracts a unique key from each item. |
-
-**Example**  
-```ts
-const items = [
-  { id: '1', name: 'a' },
-  { id: '2', name: 'b' },
-  { id: '1', name: 'c' }
-];
-filterUnique(items, (item) => item.id);
-// returns [{ id: '1', name: 'c' }, { id: '2', name: 'b' }]
-```
-
-<a name="isDefined"></a>
-
-## isDefined ⇒
-Type guard that checks if a value is neither undefined nor null.
-This is useful for filtering arrays and narrowing types in TypeScript.
-
-**Kind**: global constant  
-**Returns**: True if the value is not undefined and not null, false otherwise.  
-
-| Param | Description |
-| --- | --- |
-| value | The value to check for being defined. |
-
-**Example**  
-```ts
-const values = [1, null, 2, undefined, 3];
-const definedValues = values.filter(isDefined);
-// returns [1, 2, 3]
-
-const maybeValue: string | null | undefined = getOptionalValue();
-if (isDefined(maybeValue)) {
-  // TypeScript knows maybeValue is string here
-  console.log(maybeValue.toUpperCase());
-}
-```
-
-### find
-
-Array search utilities that throw errors when items are not found.
+<dl>
+<dt><a href="#filterUnique">filterUnique(items, getKey)</a> ⇒ <code>Array.&lt;T&gt;</code></dt>
+<dd><p>Filters an array to keep only unique items based on a key extraction function.
+When duplicate keys are found, the last occurrence is kept.</p>
+</dd>
+<dt><a href="#isDefined">isDefined(value)</a> ⇒</dt>
+<dd><p>Type guard that checks if a value is neither undefined nor null.
+This is useful for filtering arrays and narrowing types in TypeScript.</p>
+</dd>
+<dt><a href="#asTuple">asTuple(arr)</a> ⇒</dt>
+<dd><p>Type-level function that ensures the input array is treated as a tuple type.
+This is useful for preserving exact array literal types.</p>
+</dd>
+<dt><a href="#groupBy">groupBy(array, getKey, initialValue)</a> ⇒</dt>
+<dd><p>Groups the elements of an array based on a key derived from each element.</p>
+</dd>
+<dt><a href="#roundToDecimals">roundToDecimals(value, decimals)</a> ⇒</dt>
+<dd></dd>
+<dt><a href="#stringToNumber">stringToNumber(value)</a> ⇒</dt>
+<dd><p>Safely converts a string to a number with validation.
+Throws an error if the string cannot be converted to a valid finite number.</p>
+</dd>
+<dt><a href="#toSorted">toSorted(array, getKey, order)</a> ⇒</dt>
+<dd><p>Sorts an array by a key extracted from each item, returning a new sorted array.
+The original array is not modified.</p>
+</dd>
+<dt><a href="#createSingletonAsync">createSingletonAsync(options)</a> ⇒</dt>
+<dd><p>Creates an async singleton that lazily fetches and caches a value.
+The cached value is validated before each use and refreshed if invalid.
+Handles concurrent calls by ensuring only one fetch happens at a time.</p>
+</dd>
+<dt><a href="#createSingletonSync">createSingletonSync(options)</a> ⇒</dt>
+<dd><p>Creates a synchronous singleton that lazily fetches and caches a value.
+The cached value is validated before each use and refreshed if invalid.</p>
+</dd>
+<dt><a href="#callInOrderWithErrorHandling">callInOrderWithErrorHandling(handlers, params)</a></dt>
+<dd><p>Calls all handlers in order, collecting errors and throwing them at the end.
+If only one error occurs, throws that error directly.
+If multiple errors occur, throws an AggregateError.</p>
+</dd>
+</dl>
 
 <a name="findOrThrow"></a>
 
@@ -116,7 +156,6 @@ findOrThrow(numbers, n => n === 2); // returns 2
 findOrThrow(numbers, n => n > 2); // returns 3
 findOrThrow(numbers, n => n === 5); // throws Error: Item not found
 ```
-
 <a name="firstOrThrow"></a>
 
 ## firstOrThrow ⇒
@@ -140,7 +179,6 @@ const items = ['a', 'b', 'c'];
 firstOrThrow(items); // returns 'a'
 firstOrThrow([]); // throws Error: No item found at index 0
 ```
-
 <a name="indexOrThrow"></a>
 
 ## indexOrThrow ⇒
@@ -166,11 +204,6 @@ indexOrThrow(items, 1); // returns 'b'
 indexOrThrow(items, 3); // throws Error: No item found at index 3
 indexOrThrow(items, -1); // throws Error: No item found at index -1
 ```
-
-### functions
-
-Higher-order function utilities.
-
 <a name="makeThrottled"></a>
 
 ## makeThrottled ⇒
@@ -206,7 +239,6 @@ const promise3 = throttledFetch();
 await sleep(1100);
 const result2 = await throttledFetch(); // New execution
 ```
-
 <a name="sleep"></a>
 
 ## sleep ⇒
@@ -231,30 +263,6 @@ for (let i = 0; i < 5; i++) {
   await sleep(500);
 }
 ```
-
-### map-reduce
-
-Array and async iteration utilities for mapping, reducing, and transforming data.
-
-<a name="asTuple"></a>
-
-## asTuple(arr) ⇒
-Type-level function that ensures the input array is treated as a tuple type.
-This is useful for preserving exact array literal types.
-
-**Kind**: global function  
-**Returns**: The same array, but with tuple type preservation.  
-
-| Param | Description |
-| --- | --- |
-| arr | The array to treat as a tuple. |
-
-**Example**  
-```ts
-const tuple = asTuple([1, 2, 3]); // Type: [1, 2, 3]
-const array = [1, 2, 3]; // Type: number[]
-```
-
 <a name="asyncFlatMap"></a>
 
 ## asyncFlatMap ⇒
@@ -283,7 +291,6 @@ const letters = await asyncFlatMap(words, async (word, index) => {
 // const mapped = await asyncMap(words, mapper);
 // const flattened = mapped.flat();
 ```
-
 <a name="asyncMap"></a>
 
 ## asyncMap ⇒
@@ -315,7 +322,6 @@ async function* generateNumbers() {
 const result = await asyncMap(generateNumbers(), async (n) => n * 2);
 // returns [2, 4, 6]
 ```
-
 <a name="asyncReduce"></a>
 
 ## asyncReduce ⇒
@@ -352,7 +358,6 @@ const combined = await asyncReduce(
 );
 // returns ' hello world'
 ```
-
 <a name="batchArray"></a>
 
 ## batchArray ⇒
@@ -375,7 +380,6 @@ batchArray([1, 2, 3, 4, 5], 2);
 batchArray(['a', 'b', 'c'], 3);
 // returns [['a', 'b', 'c']]
 ```
-
 <a name="batchArrayByWeights"></a>
 
 ## batchArrayByWeights ⇒
@@ -400,7 +404,6 @@ batchArrayByWeights(items, 5, item => item.length);
 // Batch 2: 'ccc' (3) = 3 ≤ 5
 // Batch 3: 'dddd' (4) = 4 ≤ 5
 ```
-
 <a name="batchAsyncIterableByWeights"></a>
 
 ## batchAsyncIterableByWeights
@@ -427,7 +430,6 @@ for await (const batch of batchAsyncIterableByWeights(generateItems(), 5, item =
 }
 // Outputs: ['a', 'bb'], ['ccc'], ['dddd']
 ```
-
 <a name="pluckIds"></a>
 
 ## pluckIds ⇒
@@ -463,7 +465,182 @@ pluckIds(users, user => user.friendIds);
 pluckIds(users, user => [user.id, user.friendIds]);
 // returns [1, 2, 3]
 ```
+<a name="createRange"></a>
 
+## createRange ⇒
+Creates an array of consecutive integers from 0 to length-1.
+
+**Kind**: global constant  
+**Returns**: An array of integers from 0 to length-1.  
+**Throws**:
+
+- <code>Error</code> If length is negative.
+
+
+| Param | Description |
+| --- | --- |
+| length | The number of elements in the range. Must be non-negative. |
+
+**Example**  
+```ts
+createRange(5); // returns [0, 1, 2, 3, 4]
+createRange(0); // returns []
+createRange(-1); // throws Error
+```
+<a name="createSubject"></a>
+
+## createSubject ⇒
+Creates a subject (observable) for event-driven programming.
+Allows subscribers to listen for events and emit events to all subscribers.
+Handlers are called in order, and all handlers are executed even if some fail.
+
+**Kind**: global constant  
+**Returns**: An object with subscribe and emit methods.  
+**Example**  
+```ts
+const subject = createSubject<string>();
+
+// Subscribe to events
+const unsubscribe = subject.subscribe(async (message) => {
+  console.log('Received:', message);
+});
+
+// Emit events to all subscribers
+await subject.emit('Hello, world!');
+
+// Unsubscribe when done
+unsubscribe();
+```
+<a name="mergeSubjects"></a>
+
+## mergeSubjects ⇒
+Merges multiple subjects into a single subscribable subject.
+A handler subscribed to the merged subject will receive events from all source subjects.
+Note: The merged subject cannot emit events, only subscribe to them.
+
+**Kind**: global constant  
+**Returns**: A merged subject with only a subscribe method (no emit).  
+
+| Param | Description |
+| --- | --- |
+| subjects | Array of subjects to merge. |
+
+**Example**  
+```ts
+const subject1 = createSubject<string>();
+const subject2 = createSubject<string>();
+
+const merged = mergeSubjects([subject1, subject2]);
+
+// Subscribe once to receive events from both subjects
+merged.subscribe((message) => {
+  console.log('Received from any subject:', message);
+});
+
+await subject1.emit('From subject1');
+await subject2.emit('From subject2');
+// Both messages are received by the merged subscriber
+```
+<a name="filterUnique"></a>
+
+## filterUnique(items, getKey) ⇒ <code>Array.&lt;T&gt;</code>
+Filters an array to keep only unique items based on a key extraction function.
+When duplicate keys are found, the last occurrence is kept.
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;T&gt;</code> - An array containing only unique items based on the extracted keys.  
+
+| Param | Description |
+| --- | --- |
+| items | The array of items to filter. |
+| getKey | Function that extracts a unique key from each item. |
+
+**Example**  
+```ts
+const items = [
+  { id: '1', name: 'a' },
+  { id: '2', name: 'b' },
+  { id: '1', name: 'c' }
+];
+filterUnique(items, (item) => item.id);
+// returns [{ id: '1', name: 'c' }, { id: '2', name: 'b' }]
+```
+<a name="isDefined"></a>
+
+## isDefined(value) ⇒
+Type guard that checks if a value is neither undefined nor null.
+This is useful for filtering arrays and narrowing types in TypeScript.
+
+**Kind**: global function  
+**Returns**: True if the value is not undefined and not null, false otherwise.  
+
+| Param | Description |
+| --- | --- |
+| value | The value to check for being defined. |
+
+**Example**  
+```ts
+const values = [1, null, 2, undefined, 3];
+const definedValues = values.filter(isDefined);
+// returns [1, 2, 3]
+
+const maybeValue: string | null | undefined = getOptionalValue();
+if (isDefined(maybeValue)) {
+  // TypeScript knows maybeValue is string here
+  console.log(maybeValue.toUpperCase());
+}
+```
+<a name="asTuple"></a>
+
+## asTuple(arr) ⇒
+Type-level function that ensures the input array is treated as a tuple type.
+This is useful for preserving exact array literal types.
+
+**Kind**: global function  
+**Returns**: The same array, but with tuple type preservation.  
+
+| Param | Description |
+| --- | --- |
+| arr | The array to treat as a tuple. |
+
+**Example**  
+```ts
+const tuple = asTuple([1, 2, 3]); // Type: [1, 2, 3]
+const array = [1, 2, 3]; // Type: number[]
+```
+<a name="groupBy"></a>
+
+## groupBy(array, getKey, initialValue) ⇒
+Groups the elements of an array based on a key derived from each element.
+
+**Kind**: global function  
+**Returns**: An object where each key maps to an array of elements that share that key.  
+
+| Param | Description |
+| --- | --- |
+| array | The array to be grouped. |
+| getKey | A function that derives the key from each element. |
+| initialValue | An initial value for the grouped result. |
+
+**Example**  
+```js
+const data = [
+  { category: 'fruit', name: 'apple' },
+  { category: 'vegetable', name: 'carrot' },
+  { category: 'fruit', name: 'banana' },
+];
+const grouped = groupBy(data, item => item.category, {});
+// Result:
+// {
+//   fruit: [
+//     { category: 'fruit', name: 'apple' },
+//     { category: 'fruit', name: 'banana' },
+//   ],
+//   vegetable: [
+//     { category: 'vegetable', name: 'carrot' },
+//   ],
+// };
+```
 <a name="roundToDecimals"></a>
 
 ## roundToDecimals(value, decimals) ⇒
@@ -482,7 +659,6 @@ roundToDecimals(3.14159, 0); // returns 3
 roundToDecimals(3.14159, 3); // returns 3.142
 roundToDecimals(3.14, 5); // returns 3.14
 ```
-
 <a name="stringToNumber"></a>
 
 ## stringToNumber(value) ⇒
@@ -509,7 +685,6 @@ stringToNumber('abc'); // throws Error: Invalid number: abc
 stringToNumber(''); // throws Error: Invalid number:
 stringToNumber('Infinity'); // throws Error: Invalid number: Infinity
 ```
-
 <a name="toSorted"></a>
 
 ## toSorted(array, getKey, order) ⇒
@@ -537,48 +712,6 @@ toSorted(users, user => user.name);
 toSorted(users, user => user.age, 'desc');
 // returns [{ name: 'John', age: 30 }, { name: 'Jane', age: 25 }]
 ```
-
-### misc
-
-Miscellaneous utilities including singletons, subjects, and ranges.
-
-<a name="createRange"></a>
-
-## createRange ⇒
-Creates an array of consecutive integers from 0 to length-1.
-
-**Kind**: global constant  
-**Returns**: An array of integers from 0 to length-1.  
-**Throws**:
-
-- <code>Error</code> If length is negative.
-
-
-| Param | Description |
-| --- | --- |
-| length | The number of elements in the range. Must be non-negative. |
-
-**Example**  
-```ts
-createRange(5); // returns [0, 1, 2, 3, 4]
-createRange(0); // returns []
-createRange(-1); // throws Error
-```
-
-## Functions
-
-<dl>
-<dt><a href="#createSingletonAsync">createSingletonAsync(options)</a> ⇒</dt>
-<dd><p>Creates an async singleton that lazily fetches and caches a value.
-The cached value is validated before each use and refreshed if invalid.
-Handles concurrent calls by ensuring only one fetch happens at a time.</p>
-</dd>
-<dt><a href="#createSingletonSync">createSingletonSync(options)</a> ⇒</dt>
-<dd><p>Creates a synchronous singleton that lazily fetches and caches a value.
-The cached value is validated before each use and refreshed if invalid.</p>
-</dd>
-</dl>
-
 <a name="createSingletonAsync"></a>
 
 ## createSingletonAsync(options) ⇒
@@ -647,86 +780,6 @@ const config1 = getConfig();
 // Subsequent calls return cached config if valid
 const config2 = getConfig(); // Same config if still valid
 ```
-
-## Constants
-
-<dl>
-<dt><a href="#createSubject">createSubject</a> ⇒</dt>
-<dd><p>Creates a subject (observable) for event-driven programming.
-Allows subscribers to listen for events and emit events to all subscribers.
-Handlers are called in order, and all handlers are executed even if some fail.</p>
-</dd>
-<dt><a href="#mergeSubjects">mergeSubjects</a> ⇒</dt>
-<dd><p>Merges multiple subjects into a single subscribable subject.
-A handler subscribed to the merged subject will receive events from all source subjects.
-Note: The merged subject cannot emit events, only subscribe to them.</p>
-</dd>
-</dl>
-
-## Functions
-
-<dl>
-<dt><a href="#callInOrderWithErrorHandling">callInOrderWithErrorHandling(handlers, params)</a></dt>
-<dd><p>Calls all handlers in order, collecting errors and throwing them at the end.
-If only one error occurs, throws that error directly.
-If multiple errors occur, throws an AggregateError.</p>
-</dd>
-</dl>
-
-<a name="createSubject"></a>
-
-## createSubject ⇒
-Creates a subject (observable) for event-driven programming.
-Allows subscribers to listen for events and emit events to all subscribers.
-Handlers are called in order, and all handlers are executed even if some fail.
-
-**Kind**: global constant  
-**Returns**: An object with subscribe and emit methods.  
-**Example**  
-```ts
-const subject = createSubject<string>();
-
-// Subscribe to events
-const unsubscribe = subject.subscribe(async (message) => {
-  console.log('Received:', message);
-});
-
-// Emit events to all subscribers
-await subject.emit('Hello, world!');
-
-// Unsubscribe when done
-unsubscribe();
-```
-<a name="mergeSubjects"></a>
-
-## mergeSubjects ⇒
-Merges multiple subjects into a single subscribable subject.
-A handler subscribed to the merged subject will receive events from all source subjects.
-Note: The merged subject cannot emit events, only subscribe to them.
-
-**Kind**: global constant  
-**Returns**: A merged subject with only a subscribe method (no emit).  
-
-| Param | Description |
-| --- | --- |
-| subjects | Array of subjects to merge. |
-
-**Example**  
-```ts
-const subject1 = createSubject<string>();
-const subject2 = createSubject<string>();
-
-const merged = mergeSubjects([subject1, subject2]);
-
-// Subscribe once to receive events from both subjects
-merged.subscribe((message) => {
-  console.log('Received from any subject:', message);
-});
-
-await subject1.emit('From subject1');
-await subject2.emit('From subject2');
-// Both messages are received by the merged subscriber
-```
 <a name="callInOrderWithErrorHandling"></a>
 
 ## callInOrderWithErrorHandling(handlers, params)
@@ -745,15 +798,6 @@ If multiple errors occur, throws an AggregateError.
 | --- | --- |
 | handlers | Set of handler functions to call. |
 | params | Parameters to pass to each handler. |
-
-
-### object
-
-Object manipulation utilities.
-
-### schemas
-
-Zod schema definitions for common validation patterns.
 
 ## Development
 

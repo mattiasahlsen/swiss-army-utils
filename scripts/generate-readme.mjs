@@ -1,60 +1,5 @@
-import { readdirSync, statSync, writeFileSync } from 'fs';
-import { join, relative } from 'path';
-import { execSync } from 'child_process';
-
-const distDir = './dist/esm';
-
-function getAllJsFiles(dir, fileList = []) {
-  const files = readdirSync(dir);
-  
-  files.forEach(file => {
-    const filePath = join(dir, file);
-    if (statSync(filePath).isDirectory()) {
-      getAllJsFiles(filePath, fileList);
-    } else if (file.endsWith('.js') && !file.endsWith('.test.js')) {
-      fileList.push(filePath);
-    }
-  });
-  
-  return fileList;
-}
-
-const files = getAllJsFiles(distDir);
-
-// Group files by category
-const categories = {
-  'compare': [],
-  'dependency-injection': [],
-  'error': [],
-  'filter': [],
-  'find': [],
-  'functions': [],
-  'map-reduce': [],
-  'misc': [],
-  'object': [],
-  'schemas': [],
-};
-
-files.forEach(file => {
-  const relativePath = relative(distDir, file);
-  const category = relativePath.split('/')[0];
-  if (categories[category]) {
-    categories[category].push(file);
-  }
-});
-
-const categoryDescriptions = {
-  'compare': 'Utilities for comparing and checking equality of values.',
-  'dependency-injection': 'Tools for managing and organizing application dependencies.',
-  'error': 'Error handling utilities and custom error classes.',
-  'filter': 'Functions for filtering and type-guarding values.',
-  'find': 'Array search utilities that throw errors when items are not found.',
-  'functions': 'Higher-order function utilities.',
-  'map-reduce': 'Array and async iteration utilities for mapping, reducing, and transforming data.',
-  'misc': 'Miscellaneous utilities including singletons, subjects, and ranges.',
-  'object': 'Object manipulation utilities.',
-  'schemas': 'Zod schema definitions for common validation patterns.',
-};
+import { writeFileSync } from 'fs';
+import jsdoc2md from 'jsdoc-to-markdown';
 
 let markdown = `# swiss-army-utils
 
@@ -80,23 +25,8 @@ import { sleep } from 'swiss-army-utils/functions/sleep';
 
 `;
 
-for (const [category, fileList] of Object.entries(categories)) {
-  if (fileList.length === 0) continue;
-  
-  markdown += `### ${category}\n\n`;
-  markdown += `${categoryDescriptions[category] || ''}\n\n`;
-  
-  for (const file of fileList) {
-    try {
-      const jsdocMd = execSync(`npx jsdoc2md "${file}"`, { encoding: 'utf-8' });
-      if (jsdocMd.trim()) {
-        markdown += jsdocMd + '\n';
-      }
-    } catch (error) {
-      console.error(`Error processing ${file}:`, error.message);
-    }
-  }
-}
+const functionDocs = await jsdoc2md.render({ files: ['./dist/esm/**/*.js'] });
+markdown += functionDocs;
 
 markdown += `## Development
 
