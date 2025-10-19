@@ -1,4 +1,4 @@
-name: Tag on PR Merge
+name: Create tag if new version
 
 on:
   push:
@@ -8,9 +8,33 @@ on:
 permissions:
   contents: write
 
+env:
+  NODE_VERSION: '22.15.1' # set this to the node version to use (e.g. '8.x', '10.x', '12.x')
+
 jobs:
+  ci:
+    runs-on: ubuntu-latest
+    environment: main
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install project
+        run: |
+          npm ci
+
+      - name: Run CI checks (format check, lint, build, test)
+        run: npm run check
+
   create-tag:
     runs-on: ubuntu-latest
+    environment: main
+    needs: ci
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,7 +44,7 @@ jobs:
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.15.x'
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Get package version
         id: get_version

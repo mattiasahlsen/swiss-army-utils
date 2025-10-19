@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 jobs:
-  lint-build-test:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -25,7 +25,7 @@ jobs:
 
       - name: Install project
         run: |
-          npm install
+          npm ci
 
       - name: Run CI checks (format check, lint, build, test)
-        run: npm run ci
+        run: npm run check

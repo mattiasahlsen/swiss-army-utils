@@ -26,7 +26,7 @@
     "format:check": "prettier --check \"src/**/*.ts\"",
     "format": "prettier --write \"src/**/*.ts\"",
     "updateReadme": "npm run build && tsx scripts/updateReadme.ts",
-    "ci": "npm run format:check && npm run lint && npm run build && npm run test",
+    "check": "npm run format:check && npm run lint && npm run build && npm run test",
     "dev": "npm run format && npm run lint && npm run build && npm run updateReadme && npm run test",
     "prepublishOnly": "npm run ci",
     "preversion": "npm run ci"
