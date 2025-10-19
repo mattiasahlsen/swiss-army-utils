@@ -8,13 +8,17 @@ describe('nonEmptyStringSchema', () => {
     expect(nonEmptyStringSchema.parse('  ')).toBe('  '); // multiple spaces
     expect(nonEmptyStringSchema.parse('hello world')).toBe('hello world');
     expect(nonEmptyStringSchema.parse('123')).toBe('123');
-    expect(nonEmptyStringSchema.parse('special!@#$%chars')).toBe('special!@#$%chars');
+    expect(nonEmptyStringSchema.parse('special!@#$%chars')).toBe(
+      'special!@#$%chars'
+    );
     expect(nonEmptyStringSchema.parse('\n')).toBe('\n'); // newline is non-empty
     expect(nonEmptyStringSchema.parse('\t')).toBe('\t'); // tab is non-empty
   });
 
   test('rejects empty string', () => {
-    expect(() => nonEmptyStringSchema.parse('')).toThrow('This field cannot be empty');
+    expect(() => nonEmptyStringSchema.parse('')).toThrow(
+      'This field cannot be empty'
+    );
   });
 
   test('rejects non-string values', () => {

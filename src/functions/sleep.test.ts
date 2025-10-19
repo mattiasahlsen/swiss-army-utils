@@ -6,7 +6,7 @@ describe('sleep', () => {
     await sleep(50);
     const endTime = Date.now();
     const elapsed = endTime - startTime;
-    
+
     // Allow some variance for timing (typically 50ms ± 10ms is reasonable)
     expect(elapsed).toBeGreaterThanOrEqual(45);
     expect(elapsed).toBeLessThan(100);
@@ -17,7 +17,7 @@ describe('sleep', () => {
     await sleep(0);
     const endTime = Date.now();
     const elapsed = endTime - startTime;
-    
+
     // Should be very fast for 0ms
     expect(elapsed).toBeLessThan(20);
   });
@@ -32,7 +32,7 @@ describe('sleep', () => {
     await Promise.all([sleep(30), sleep(30), sleep(30)]);
     const endTime = Date.now();
     const elapsed = endTime - startTime;
-    
+
     // All should run concurrently, so total time should be ~30ms, not 90ms
     expect(elapsed).toBeGreaterThanOrEqual(25);
     expect(elapsed).toBeLessThan(60);

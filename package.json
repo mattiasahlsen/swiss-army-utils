@@ -1,6 +1,6 @@
 {
   "name": "swiss-army-utils",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "General typescript utils.",
   "type": "module",
   "workspaces": [
@@ -23,12 +23,13 @@
     "test:types": "tsc --noEmit",
     "lint": "eslint ./src",
     "build": "rimraf dist && tsc -b tsconfig.esm.build.json -b tsconfig.cjs.build.json",
+    "format:check": "prettier --check \"src/**/*.ts\"",
     "format": "prettier --write \"src/**/*.ts\"",
     "updateReadme": "npm run build && tsx scripts/updateReadme.ts",
-    "prepare": "npm run lint && npm run build && npm run test",
-    "preversion": "npm run prepare",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "ci": "npm run format:check && npm run lint && npm run build && npm run test",
+    "dev": "npm run format && npm run lint && npm run build && npm run updateReadme && npm run test",
+    "prepublishOnly": "npm run ci",
+    "preversion": "npm run ci"
   },
   "keywords": [
     "typescript",

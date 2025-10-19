@@ -12,7 +12,7 @@
  * stringToNumber('3.14'); // returns 3.14
  * stringToNumber('-42'); // returns -42
  * stringToNumber('abc'); // throws Error: Invalid number: abc
- * stringToNumber(''); // throws Error: Invalid number: 
+ * stringToNumber(''); // throws Error: Invalid number:
  * stringToNumber('Infinity'); // throws Error: Invalid number: Infinity
  * ```
  */
