@@ -3,6 +3,9 @@
   "version": "0.7.1",
   "description": "General typescript utils.",
   "type": "module",
+  "workspaces": [
+    "examples/*"
+  ],
   "files": [
     "dist"
   ],
