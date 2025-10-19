@@ -8,5 +8,6 @@
     "outDir": "./dist/esm",
     "tsBuildInfoFile": "./dist/esm/.tsbuildinfo"
   },
+  "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.test.ts"]
 }
