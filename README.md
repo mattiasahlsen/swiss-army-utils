@@ -27,50 +27,50 @@ import { sleep } from 'swiss-army-utils/functions/sleep';
 <dd><p>Filters an array to keep only unique items based on a key extraction function.
 When duplicate keys are found, the last occurrence is kept.</p>
 </dd>
-<dt><a href="#isDefined">isDefined(value)</a> ⇒</dt>
+<dt><a href="#isDefined">isDefined(value)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Type guard that checks if a value is neither undefined nor null.
 This is useful for filtering arrays and narrowing types in TypeScript.</p>
 </dd>
-<dt><a href="#findOrThrow">findOrThrow(arr, predicate)</a> ⇒</dt>
+<dt><a href="#findOrThrow">findOrThrow(arr, predicate)</a> ⇒ <code>T</code></dt>
 <dd><p>Finds the first item in the array that matches the predicate, throwing an error if no match is found.</p>
 </dd>
-<dt><a href="#firstOrThrow">firstOrThrow(items)</a> ⇒</dt>
+<dt><a href="#firstOrThrow">firstOrThrow(items)</a> ⇒ <code>T</code></dt>
 <dd><p>Returns the first item in the array, throwing an error if the array is empty.</p>
 </dd>
-<dt><a href="#indexOrThrow">indexOrThrow(items, index)</a> ⇒</dt>
+<dt><a href="#indexOrThrow">indexOrThrow(items, index)</a> ⇒ <code>T</code></dt>
 <dd><p>Returns the item at the specified index in the array, throwing an error if the index is out of bounds.</p>
 </dd>
-<dt><a href="#makeThrottled">makeThrottled(options, fn)</a> ⇒</dt>
+<dt><a href="#makeThrottled">makeThrottled(options, fn)</a> ⇒ <code>function</code></dt>
 <dd><p>Creates a throttled version of a function that enforces a minimum delay between executions.
 Multiple calls made during the delay period will share the same promise and return the same result.
 After the delay period, subsequent calls will trigger a new execution.</p>
 </dd>
-<dt><a href="#sleep">sleep(ms)</a> ⇒</dt>
+<dt><a href="#sleep">sleep(ms)</a> ⇒ <code>Promise.&lt;void&gt;</code></dt>
 <dd><p>Asynchronously pauses execution for a specified duration.
 Returns a promise that resolves after the given number of milliseconds.</p>
 </dd>
-<dt><a href="#asTuple">asTuple(arr)</a> ⇒</dt>
+<dt><a href="#asTuple">asTuple(arr)</a> ⇒ <code>T</code></dt>
 <dd><p>Type-level function that ensures the input array is treated as a tuple type.
 This is useful for preserving exact array literal types.</p>
 </dd>
-<dt><a href="#asyncFlatMap">asyncFlatMap(array, mapper)</a> ⇒</dt>
+<dt><a href="#asyncFlatMap">asyncFlatMap(array, mapper)</a> ⇒ <code>Promise.&lt;Array&gt;</code></dt>
 <dd><p>Asynchronously maps over an array or async iterable and flattens the results.
 Equivalent to calling asyncMap followed by Array.flat().
 The mapping is performed sequentially to maintain order.</p>
 </dd>
-<dt><a href="#asyncMap">asyncMap(iterator, mapper)</a> ⇒</dt>
+<dt><a href="#asyncMap">asyncMap(iterator, mapper)</a> ⇒ <code>Promise.&lt;Array.&lt;R&gt;&gt;</code></dt>
 <dd><p>Asynchronously maps over an array or async iterable, applying an async mapper function to each item.
 The mapping is performed sequentially (not in parallel) to maintain order and avoid overwhelming resources.</p>
 </dd>
-<dt><a href="#asyncReduce">asyncReduce(items, reducer, initialResult)</a> ⇒</dt>
+<dt><a href="#asyncReduce">asyncReduce(items, reducer, initialResult)</a> ⇒ <code>Promise.&lt;Result&gt;</code></dt>
 <dd><p>Asynchronously reduces an array to a single value using an async reducer function.
 The reduction is performed sequentially, processing one item at a time.</p>
 </dd>
-<dt><a href="#batchArray">batchArray(array, batchSize)</a> ⇒</dt>
+<dt><a href="#batchArray">batchArray(array, batchSize)</a> ⇒ <code>Array.&lt;Array.&lt;T&gt;&gt;</code></dt>
 <dd><p>Splits an array into smaller arrays (batches) of a specified size.
 Each batch will contain at most <code>batchSize</code> items.</p>
 </dd>
-<dt><a href="#batchArrayByWeights">batchArrayByWeights(items, batchSize, getWeight)</a> ⇒</dt>
+<dt><a href="#batchArrayByWeights">batchArrayByWeights(items, batchSize, getWeight)</a> ⇒ <code>Array.&lt;Array.&lt;T&gt;&gt;</code></dt>
 <dd><p>Splits an array into smaller arrays (batches) based on weighted sizes.
 Items are grouped into batches where the total weight doesn&#39;t exceed the specified batch size.</p>
 </dd>
@@ -79,33 +79,33 @@ Items are grouped into batches where the total weight doesn&#39;t exceed the spe
 Items are grouped into batches where the total weight doesn&#39;t exceed the specified batch size.
 This is an async generator that yields batches as they are formed.</p>
 </dd>
-<dt><a href="#groupBy">groupBy(array, getKey, initialValue)</a> ⇒</dt>
+<dt><a href="#groupBy">groupBy(array, getKey, initialValue)</a> ⇒ <code>Record.&lt;Key, Array.&lt;T&gt;&gt;</code></dt>
 <dd><p>Groups the elements of an array based on a key derived from each element.</p>
 </dd>
-<dt><a href="#pluckIds">pluckIds(items, idGetter)</a> ⇒</dt>
+<dt><a href="#pluckIds">pluckIds(items, idGetter)</a> ⇒ <code>Array</code></dt>
 <dd><p>Extracts unique IDs from an array of objects using an ID getter function.
 The function flattens nested arrays up to 10 levels deep, filters out null/undefined values,
 and returns a deduplicated array of IDs.</p>
 </dd>
-<dt><a href="#roundToDecimals">roundToDecimals(value, decimals)</a> ⇒</dt>
+<dt><a href="#roundToDecimals">roundToDecimals(value, decimals)</a> ⇒ <code>number</code></dt>
 <dd></dd>
-<dt><a href="#stringToNumber">stringToNumber(value)</a> ⇒</dt>
+<dt><a href="#stringToNumber">stringToNumber(value)</a> ⇒ <code>number</code></dt>
 <dd><p>Safely converts a string to a number with validation.
 Throws an error if the string cannot be converted to a valid finite number.</p>
 </dd>
-<dt><a href="#toSorted">toSorted(array, getKey, order)</a> ⇒</dt>
+<dt><a href="#toSorted">toSorted(array, getKey, order)</a> ⇒ <code>Array.&lt;T&gt;</code></dt>
 <dd><p>Sorts an array by a key extracted from each item, returning a new sorted array.
 The original array is not modified.</p>
 </dd>
-<dt><a href="#createRange">createRange(length)</a> ⇒</dt>
+<dt><a href="#createRange">createRange(length)</a> ⇒ <code>Array.&lt;number&gt;</code></dt>
 <dd><p>Creates an array of consecutive integers from 0 to length-1.</p>
 </dd>
-<dt><a href="#createSingletonAsync">createSingletonAsync(options)</a> ⇒</dt>
+<dt><a href="#createSingletonAsync">createSingletonAsync(options)</a> ⇒ <code>function</code></dt>
 <dd><p>Creates an async singleton that lazily fetches and caches a value.
 The cached value is validated before each use and refreshed if invalid.
 Handles concurrent calls by ensuring only one fetch happens at a time.</p>
 </dd>
-<dt><a href="#createSingletonSync">createSingletonSync(options)</a> ⇒</dt>
+<dt><a href="#createSingletonSync">createSingletonSync(options)</a> ⇒ <code>function</code></dt>
 <dd><p>Creates a synchronous singleton that lazily fetches and caches a value.
 The cached value is validated before each use and refreshed if invalid.</p>
 </dd>
@@ -114,12 +114,12 @@ The cached value is validated before each use and refreshed if invalid.</p>
 If only one error occurs, throws that error directly.
 If multiple errors occur, throws an AggregateError.</p>
 </dd>
-<dt><a href="#createSubject">createSubject()</a> ⇒</dt>
+<dt><a href="#createSubject">createSubject()</a> ⇒ <code>Object</code></dt>
 <dd><p>Creates a subject (observable) for event-driven programming.
 Allows subscribers to listen for events and emit events to all subscribers.
 Handlers are called in order, and all handlers are executed even if some fail.</p>
 </dd>
-<dt><a href="#mergeSubjects">mergeSubjects(subjects)</a> ⇒</dt>
+<dt><a href="#mergeSubjects">mergeSubjects(subjects)</a> ⇒ <code>Object</code></dt>
 <dd><p>Merges multiple subjects into a single subscribable subject.
 A handler subscribed to the merged subject will receive events from all source subjects.
 Note: The merged subject cannot emit events, only subscribe to them.</p>
@@ -152,16 +152,16 @@ filterUnique(items, (item) => item.id);
 ```
 <a name="isDefined"></a>
 
-### isDefined(value) ⇒
+### isDefined(value) ⇒ <code>boolean</code>
 Type guard that checks if a value is neither undefined nor null.
 This is useful for filtering arrays and narrowing types in TypeScript.
 
 **Kind**: global function  
-**Returns**: True if the value is not undefined and not null, false otherwise.  
+**Returns**: <code>boolean</code> - True if the value is not undefined and not null, false otherwise.  
 
-| Param | Description |
-| --- | --- |
-| value | The value to check for being defined. |
+| Param | Type | Description |
+| --- | --- | --- |
+| value | <code>T</code> \| <code>undefined</code> \| <code>null</code> | The value to check for being defined. |
 
 **Example**  
 ```ts
@@ -177,20 +177,20 @@ if (isDefined(maybeValue)) {
 ```
 <a name="findOrThrow"></a>
 
-### findOrThrow(arr, predicate) ⇒
+### findOrThrow(arr, predicate) ⇒ <code>T</code>
 Finds the first item in the array that matches the predicate, throwing an error if no match is found.
 
 **Kind**: global function  
-**Returns**: The first item that satisfies the predicate.  
+**Returns**: <code>T</code> - The first item that satisfies the predicate.  
 **Throws**:
 
 - <code>Error</code> If no item matches the predicate.
 
 
-| Param | Description |
-| --- | --- |
-| arr | The array to search. |
-| predicate | Function to test each item. Returns true for the item to be returned. |
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>Array.&lt;T&gt;</code> | The array to search. |
+| predicate | <code>function</code> | Function to test each item. Returns true for the item to be returned. |
 
 **Example**  
 ```ts
@@ -202,19 +202,19 @@ findOrThrow(numbers, n => n === 5); // throws Error: Item not found
 ```
 <a name="firstOrThrow"></a>
 
-### firstOrThrow(items) ⇒
+### firstOrThrow(items) ⇒ <code>T</code>
 Returns the first item in the array, throwing an error if the array is empty.
 
 **Kind**: global function  
-**Returns**: The first item in the array.  
+**Returns**: <code>T</code> - The first item in the array.  
 **Throws**:
 
 - <code>Error</code> If the array is empty.
 
 
-| Param | Description |
-| --- | --- |
-| items | The array to get the first item from. |
+| Param | Type | Description |
+| --- | --- | --- |
+| items | <code>Array.&lt;T&gt;</code> | The array to get the first item from. |
 
 **Example**  
 ```ts
@@ -225,20 +225,20 @@ firstOrThrow([]); // throws Error: No item found at index 0
 ```
 <a name="indexOrThrow"></a>
 
-### indexOrThrow(items, index) ⇒
+### indexOrThrow(items, index) ⇒ <code>T</code>
 Returns the item at the specified index in the array, throwing an error if the index is out of bounds.
 
 **Kind**: global function  
-**Returns**: The item at the specified index.  
+**Returns**: <code>T</code> - The item at the specified index.  
 **Throws**:
 
 - <code>Error</code> If no item exists at the specified index.
 
 
-| Param | Description |
-| --- | --- |
-| items | The array to get the item from. |
-| index | The index of the item to retrieve. |
+| Param | Type | Description |
+| --- | --- | --- |
+| items | <code>Array.&lt;T&gt;</code> | The array to get the item from. |
+| index | <code>number</code> | The index of the item to retrieve. |
 
 **Example**  
 ```ts
@@ -250,20 +250,20 @@ indexOrThrow(items, -1); // throws Error: No item found at index -1
 ```
 <a name="makeThrottled"></a>
 
-### makeThrottled(options, fn) ⇒
+### makeThrottled(options, fn) ⇒ <code>function</code>
 Creates a throttled version of a function that enforces a minimum delay between executions.
 Multiple calls made during the delay period will share the same promise and return the same result.
 After the delay period, subsequent calls will trigger a new execution.
 
 **Kind**: global function  
-**Returns**: A throttled function that returns a promise. If multiple calls are made within the delay period,
+**Returns**: <code>function</code> - A throttled function that returns a promise. If multiple calls are made within the delay period,
          they will all receive the same promise and result.  
 
-| Param | Description |
-| --- | --- |
-| options | Configuration object. |
-| options.minDelay | Minimum delay in milliseconds between function executions. |
-| fn | The function to throttle. Can be synchronous or asynchronous. |
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | Configuration object. |
+| options.minDelay | <code>number</code> | Minimum delay in milliseconds between function executions. |
+| fn | <code>function</code> | The function to throttle. Can be synchronous or asynchronous. |
 
 **Example**  
 ```ts
@@ -285,16 +285,16 @@ const result2 = await throttledFetch(); // New execution
 ```
 <a name="sleep"></a>
 
-### sleep(ms) ⇒
+### sleep(ms) ⇒ <code>Promise.&lt;void&gt;</code>
 Asynchronously pauses execution for a specified duration.
 Returns a promise that resolves after the given number of milliseconds.
 
 **Kind**: global function  
-**Returns**: A promise that resolves after the specified delay.  
+**Returns**: <code>Promise.&lt;void&gt;</code> - A promise that resolves after the specified delay.  
 
-| Param | Description |
-| --- | --- |
-| ms | Duration in milliseconds to sleep. |
+| Param | Type | Description |
+| --- | --- | --- |
+| ms | <code>number</code> | Duration in milliseconds to sleep. |
 
 **Example**  
 ```ts
@@ -309,16 +309,16 @@ for (let i = 0; i < 5; i++) {
 ```
 <a name="asTuple"></a>
 
-### asTuple(arr) ⇒
+### asTuple(arr) ⇒ <code>T</code>
 Type-level function that ensures the input array is treated as a tuple type.
 This is useful for preserving exact array literal types.
 
 **Kind**: global function  
-**Returns**: The same array, but with tuple type preservation.  
+**Returns**: <code>T</code> - The same array, but with tuple type preservation.  
 
-| Param | Description |
-| --- | --- |
-| arr | The array to treat as a tuple. |
+| Param | Type | Description |
+| --- | --- | --- |
+| arr | <code>T</code> | The array to treat as a tuple. |
 
 **Example**  
 ```ts
@@ -327,18 +327,18 @@ const array = [1, 2, 3]; // Type: number[]
 ```
 <a name="asyncFlatMap"></a>
 
-### asyncFlatMap(array, mapper) ⇒
+### asyncFlatMap(array, mapper) ⇒ <code>Promise.&lt;Array&gt;</code>
 Asynchronously maps over an array or async iterable and flattens the results.
 Equivalent to calling asyncMap followed by Array.flat().
 The mapping is performed sequentially to maintain order.
 
 **Kind**: global function  
-**Returns**: A promise that resolves to a flattened array of mapped results.  
+**Returns**: <code>Promise.&lt;Array&gt;</code> - A promise that resolves to a flattened array of mapped results.  
 
-| Param | Description |
-| --- | --- |
-| array | The array or async iterable to map over. |
-| mapper | Async function that transforms each item. Receives the item and its index. |
+| Param | Type | Description |
+| --- | --- | --- |
+| array | <code>Array.&lt;T&gt;</code> \| <code>AsyncIterable.&lt;T&gt;</code> | The array or async iterable to map over. |
+| mapper | <code>function</code> | Async function that transforms each item. Receives the item and its index. |
 
 **Example**  
 ```ts
@@ -355,17 +355,17 @@ const letters = await asyncFlatMap(words, async (word, index) => {
 ```
 <a name="asyncMap"></a>
 
-### asyncMap(iterator, mapper) ⇒
+### asyncMap(iterator, mapper) ⇒ <code>Promise.&lt;Array.&lt;R&gt;&gt;</code>
 Asynchronously maps over an array or async iterable, applying an async mapper function to each item.
 The mapping is performed sequentially (not in parallel) to maintain order and avoid overwhelming resources.
 
 **Kind**: global function  
-**Returns**: A promise that resolves to an array of mapped results.  
+**Returns**: <code>Promise.&lt;Array.&lt;R&gt;&gt;</code> - A promise that resolves to an array of mapped results.  
 
-| Param | Description |
-| --- | --- |
-| iterator | The array or async iterable to map over. |
-| mapper | Async function that transforms each item. Receives the item and its index. |
+| Param | Type | Description |
+| --- | --- | --- |
+| iterator | <code>Array.&lt;T&gt;</code> \| <code>AsyncIterable.&lt;T&gt;</code> | The array or async iterable to map over. |
+| mapper | <code>function</code> | Async function that transforms each item. Receives the item and its index. |
 
 **Example**  
 ```ts
@@ -386,18 +386,18 @@ const result = await asyncMap(generateNumbers(), async (n) => n * 2);
 ```
 <a name="asyncReduce"></a>
 
-### asyncReduce(items, reducer, initialResult) ⇒
+### asyncReduce(items, reducer, initialResult) ⇒ <code>Promise.&lt;Result&gt;</code>
 Asynchronously reduces an array to a single value using an async reducer function.
 The reduction is performed sequentially, processing one item at a time.
 
 **Kind**: global function  
-**Returns**: A promise that resolves to the final accumulated result.  
+**Returns**: <code>Promise.&lt;Result&gt;</code> - A promise that resolves to the final accumulated result.  
 
-| Param | Description |
-| --- | --- |
-| items | The array to reduce. |
-| reducer | Async function that combines the accumulator with each item. |
-| initialResult | The initial value for the accumulator. |
+| Param | Type | Description |
+| --- | --- | --- |
+| items | <code>Array.&lt;Item&gt;</code> | The array to reduce. |
+| reducer | <code>function</code> | Async function that combines the accumulator with each item. |
+| initialResult | <code>Result</code> | The initial value for the accumulator. |
 
 **Example**  
 ```ts
@@ -422,17 +422,17 @@ const combined = await asyncReduce(
 ```
 <a name="batchArray"></a>
 
-### batchArray(array, batchSize) ⇒
+### batchArray(array, batchSize) ⇒ <code>Array.&lt;Array.&lt;T&gt;&gt;</code>
 Splits an array into smaller arrays (batches) of a specified size.
 Each batch will contain at most `batchSize` items.
 
 **Kind**: global function  
-**Returns**: An array of arrays, where each sub-array is a batch.  
+**Returns**: <code>Array.&lt;Array.&lt;T&gt;&gt;</code> - An array of arrays, where each sub-array is a batch.  
 
-| Param | Description |
-| --- | --- |
-| array | The array to split into batches. |
-| batchSize | The maximum number of items per batch. |
+| Param | Type | Description |
+| --- | --- | --- |
+| array | <code>Array.&lt;T&gt;</code> | The array to split into batches. |
+| batchSize | <code>number</code> | The maximum number of items per batch. |
 
 **Example**  
 ```ts
@@ -444,18 +444,18 @@ batchArray(['a', 'b', 'c'], 3);
 ```
 <a name="batchArrayByWeights"></a>
 
-### batchArrayByWeights(items, batchSize, getWeight) ⇒
+### batchArrayByWeights(items, batchSize, getWeight) ⇒ <code>Array.&lt;Array.&lt;T&gt;&gt;</code>
 Splits an array into smaller arrays (batches) based on weighted sizes.
 Items are grouped into batches where the total weight doesn't exceed the specified batch size.
 
 **Kind**: global function  
-**Returns**: An array of arrays, where each sub-array is a batch with total weight ≤ batchSize.  
+**Returns**: <code>Array.&lt;Array.&lt;T&gt;&gt;</code> - An array of arrays, where each sub-array is a batch with total weight ≤ batchSize.  
 
-| Param | Description |
-| --- | --- |
-| items | The array to split into batches. |
-| batchSize | The maximum total weight allowed per batch. |
-| getWeight | Function to calculate the weight of each item. |
+| Param | Type | Description |
+| --- | --- | --- |
+| items | <code>Array.&lt;T&gt;</code> | The array to split into batches. |
+| batchSize | <code>number</code> | The maximum total weight allowed per batch. |
+| getWeight | <code>function</code> | Function to calculate the weight of each item. |
 
 **Example**  
 ```ts
@@ -475,11 +475,11 @@ This is an async generator that yields batches as they are formed.
 
 **Kind**: global function  
 
-| Param | Description |
-| --- | --- |
-| items | The async iterable to split into batches. |
-| batchSize | The maximum total weight allowed per batch. |
-| getWeight | Function to calculate the weight of each item. |
+| Param | Type | Description |
+| --- | --- | --- |
+| items | <code>AsyncIterable.&lt;T&gt;</code> | The async iterable to split into batches. |
+| batchSize | <code>number</code> | The maximum total weight allowed per batch. |
+| getWeight | <code>function</code> | Function to calculate the weight of each item. |
 
 **Example**  
 ```ts
@@ -494,17 +494,17 @@ for await (const batch of batchAsyncIterableByWeights(generateItems(), 5, item =
 ```
 <a name="groupBy"></a>
 
-### groupBy(array, getKey, initialValue) ⇒
+### groupBy(array, getKey, initialValue) ⇒ <code>Record.&lt;Key, Array.&lt;T&gt;&gt;</code>
 Groups the elements of an array based on a key derived from each element.
 
 **Kind**: global function  
-**Returns**: An object where each key maps to an array of elements that share that key.  
+**Returns**: <code>Record.&lt;Key, Array.&lt;T&gt;&gt;</code> - An object where each key maps to an array of elements that share that key.  
 
-| Param | Description |
-| --- | --- |
-| array | The array to be grouped. |
-| getKey | A function that derives the key from each element. |
-| initialValue | An initial value for the grouped result. |
+| Param | Type | Description |
+| --- | --- | --- |
+| array | <code>Array.&lt;T&gt;</code> | The array to be grouped. |
+| getKey | <code>function</code> | A function that derives the key from each element. |
+| initialValue | <code>Record.&lt;Key, Array.&lt;T&gt;&gt;</code> | An initial value for the grouped result. |
 
 **Example**  
 ```js
@@ -527,18 +527,18 @@ const grouped = groupBy(data, item => item.category, {});
 ```
 <a name="pluckIds"></a>
 
-### pluckIds(items, idGetter) ⇒
+### pluckIds(items, idGetter) ⇒ <code>Array</code>
 Extracts unique IDs from an array of objects using an ID getter function.
 The function flattens nested arrays up to 10 levels deep, filters out null/undefined values,
 and returns a deduplicated array of IDs.
 
 **Kind**: global function  
-**Returns**: An array of unique, non-null IDs.  
+**Returns**: <code>Array</code> - An array of unique, non-null IDs.  
 
-| Param | Description |
-| --- | --- |
-| items | The array of objects to extract IDs from. |
-| idGetter | Function that extracts the ID(s) from each item. Can return single values or nested arrays. |
+| Param | Type | Description |
+| --- | --- | --- |
+| items | <code>Array.&lt;T&gt;</code> | The array of objects to extract IDs from. |
+| idGetter | <code>function</code> | Function that extracts the ID(s) from each item. Can return single values or nested arrays. |
 
 **Example**  
 ```ts
@@ -562,14 +562,14 @@ pluckIds(users, user => [user.id, user.friendIds]);
 ```
 <a name="roundToDecimals"></a>
 
-### roundToDecimals(value, decimals) ⇒
+### roundToDecimals(value, decimals) ⇒ <code>number</code>
 **Kind**: global function  
-**Returns**: The rounded value.  
+**Returns**: <code>number</code> - The rounded value.  
 
-| Param | Description |
-| --- | --- |
-| value | The value to round. |
-| decimals | The number of decimal places to round to. |
+| Param | Type | Description |
+| --- | --- | --- |
+| value | <code>number</code> | The value to round. |
+| decimals | <code>number</code> | The number of decimal places to round to. |
 
 **Example**  
 ```ts
@@ -580,20 +580,20 @@ roundToDecimals(3.14, 5); // returns 3.14
 ```
 <a name="stringToNumber"></a>
 
-### stringToNumber(value) ⇒
+### stringToNumber(value) ⇒ <code>number</code>
 Safely converts a string to a number with validation.
 Throws an error if the string cannot be converted to a valid finite number.
 
 **Kind**: global function  
-**Returns**: The parsed number.  
+**Returns**: <code>number</code> - The parsed number.  
 **Throws**:
 
 - <code>Error</code> When the string is empty, not a number, or represents an infinite value.
 
 
-| Param | Description |
-| --- | --- |
-| value | The string to convert to a number. |
+| Param | Type | Description |
+| --- | --- | --- |
+| value | <code>string</code> | The string to convert to a number. |
 
 **Example**  
 ```ts
@@ -606,18 +606,18 @@ stringToNumber('Infinity'); // throws Error: Invalid number: Infinity
 ```
 <a name="toSorted"></a>
 
-### toSorted(array, getKey, order) ⇒
+### toSorted(array, getKey, order) ⇒ <code>Array.&lt;T&gt;</code>
 Sorts an array by a key extracted from each item, returning a new sorted array.
 The original array is not modified.
 
 **Kind**: global function  
-**Returns**: A new array with the same items sorted by the specified key and order.  
+**Returns**: <code>Array.&lt;T&gt;</code> - A new array with the same items sorted by the specified key and order.  
 
-| Param | Description |
-| --- | --- |
-| array | The array to sort. |
-| getKey | Function to extract the sort key from each item. |
-| order | Sort order, either 'asc' for ascending or 'desc' for descending. Defaults to 'asc'. |
+| Param | Type | Description |
+| --- | --- | --- |
+| array | <code>Array.&lt;T&gt;</code> | The array to sort. |
+| getKey | <code>function</code> | Function to extract the sort key from each item. |
+| order | <code>string</code> | Sort order, either 'asc' for ascending or 'desc' for descending. Defaults to 'asc'. |
 
 **Example**  
 ```ts
@@ -633,19 +633,19 @@ toSorted(users, user => user.age, 'desc');
 ```
 <a name="createRange"></a>
 
-### createRange(length) ⇒
+### createRange(length) ⇒ <code>Array.&lt;number&gt;</code>
 Creates an array of consecutive integers from 0 to length-1.
 
 **Kind**: global function  
-**Returns**: An array of integers from 0 to length-1.  
+**Returns**: <code>Array.&lt;number&gt;</code> - An array of integers from 0 to length-1.  
 **Throws**:
 
 - <code>Error</code> If length is negative.
 
 
-| Param | Description |
-| --- | --- |
-| length | The number of elements in the range. Must be non-negative. |
+| Param | Type | Description |
+| --- | --- | --- |
+| length | <code>number</code> | The number of elements in the range. Must be non-negative. |
 
 **Example**  
 ```ts
@@ -655,23 +655,23 @@ createRange(-1); // throws Error
 ```
 <a name="createSingletonAsync"></a>
 
-### createSingletonAsync(options) ⇒
+### createSingletonAsync(options) ⇒ <code>function</code>
 Creates an async singleton that lazily fetches and caches a value.
 The cached value is validated before each use and refreshed if invalid.
 Handles concurrent calls by ensuring only one fetch happens at a time.
 
 **Kind**: global function  
-**Returns**: A function that returns the singleton value, fetching it if necessary.  
+**Returns**: <code>function</code> - A function that returns the singleton value, fetching it if necessary.  
 **Throws**:
 
 - <code>Error</code> If the freshly fetched value is invalid.
 
 
-| Param | Description |
-| --- | --- |
-| options | Configuration object. |
-| options.getValue | Function that fetches the value asynchronously. |
-| options.isValid | Function that checks if the cached value is still valid. |
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | Configuration object. |
+| options.getValue | <code>function</code> | Function that fetches the value asynchronously. |
+| options.isValid | <code>function</code> | Function that checks if the cached value is still valid. |
 
 **Example**  
 ```ts
@@ -691,22 +691,22 @@ const [token3, token4] = await Promise.all([getToken(), getToken()]);
 ```
 <a name="createSingletonSync"></a>
 
-### createSingletonSync(options) ⇒
+### createSingletonSync(options) ⇒ <code>function</code>
 Creates a synchronous singleton that lazily fetches and caches a value.
 The cached value is validated before each use and refreshed if invalid.
 
 **Kind**: global function  
-**Returns**: A function that returns the singleton value, fetching it if necessary.  
+**Returns**: <code>function</code> - A function that returns the singleton value, fetching it if necessary.  
 **Throws**:
 
 - <code>Error</code> If the freshly fetched value is invalid.
 
 
-| Param | Description |
-| --- | --- |
-| options | Configuration object. |
-| options.getValue | Function that fetches the value synchronously. |
-| options.isValid | Function that checks if the cached value is still valid. |
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | Configuration object. |
+| options.getValue | <code>function</code> | Function that fetches the value synchronously. |
+| options.isValid | <code>function</code> | Function that checks if the cached value is still valid. |
 
 **Example**  
 ```ts
@@ -735,20 +735,20 @@ If multiple errors occur, throws an AggregateError.
 - <code>AggregateError</code> If multiple handlers fail.
 
 
-| Param | Description |
-| --- | --- |
-| handlers | Set of handler functions to call. |
-| params | Parameters to pass to each handler. |
+| Param | Type | Description |
+| --- | --- | --- |
+| handlers | <code>Set.&lt;Handler.&lt;TParams&gt;&gt;</code> | Set of handler functions to call. |
+| params | <code>TParams</code> | Parameters to pass to each handler. |
 
 <a name="createSubject"></a>
 
-### createSubject() ⇒
+### createSubject() ⇒ <code>Object</code>
 Creates a subject (observable) for event-driven programming.
 Allows subscribers to listen for events and emit events to all subscribers.
 Handlers are called in order, and all handlers are executed even if some fail.
 
 **Kind**: global function  
-**Returns**: An object with subscribe and emit methods.  
+**Returns**: <code>Object</code> - An object with subscribe and emit methods.  
 **Example**  
 ```ts
 const subject = createSubject<string>();
@@ -766,17 +766,17 @@ unsubscribe();
 ```
 <a name="mergeSubjects"></a>
 
-### mergeSubjects(subjects) ⇒
+### mergeSubjects(subjects) ⇒ <code>Object</code>
 Merges multiple subjects into a single subscribable subject.
 A handler subscribed to the merged subject will receive events from all source subjects.
 Note: The merged subject cannot emit events, only subscribe to them.
 
 **Kind**: global function  
-**Returns**: A merged subject with only a subscribe method (no emit).  
+**Returns**: <code>Object</code> - A merged subject with only a subscribe method (no emit).  
 
-| Param | Description |
-| --- | --- |
-| subjects | Array of subjects to merge. |
+| Param | Type | Description |
+| --- | --- | --- |
+| subjects | <code>Array.&lt;Subject.&lt;THandlerParams&gt;&gt;</code> | Array of subjects to merge. |
 
 **Example**  
 ```ts

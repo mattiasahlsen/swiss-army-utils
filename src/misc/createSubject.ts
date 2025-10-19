@@ -81,7 +81,7 @@ export type Subject<T> = ReturnType<typeof createSubject<T>>;
  * A handler subscribed to the merged subject will receive events from all source subjects.
  * Note: The merged subject cannot emit events, only subscribe to them.
  *
- * @param {Subject<THandlerParams>[]} subjects - Array of subjects to merge.
+ * @param {Array<Subject<THandlerParams>>} subjects - Array of subjects to merge.
  * @returns {Object} A merged subject with only a subscribe method (no emit).
  *
  * @example
