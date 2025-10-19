@@ -36,7 +36,7 @@ import { sleep } from 'swiss-army-utils/functions/sleep';
 
 ### Publish new version of npm package
 
-- Run `npm version [patch | minor | major]`
+- Run `npm run new-version [patch | minor | major]`
 - Run `npm publish --dry-run` and verify output
 - Run `npm publish`
 

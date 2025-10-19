@@ -1,6 +1,6 @@
 {
   "name": "swiss-army-utils",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "General typescript utils.",
   "type": "module",
   "workspaces": [
@@ -29,7 +29,8 @@
     "checks": "npm run format:check && npm run lint && npm run build && npm run test",
     "dev": "npm run format && npm run lint && npm run build && npm run updateReadme && npm run test",
     "prepublishOnly": "npm run checks",
-    "preversion": "npm run checks"
+    "preversion": "npm run checks",
+    "new-version": "npm version --no-git-tag-version"
   },
   "keywords": [
     "typescript",

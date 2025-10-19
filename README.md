@@ -810,7 +810,7 @@ await subject2.emit('From subject2');
 
 ### Publish new version of npm package
 
-- Run `npm version [patch | minor | major]`
+- Run `npm run new-version [patch | minor | major]`
 - Run `npm publish --dry-run` and verify output
 - Run `npm publish`
 
