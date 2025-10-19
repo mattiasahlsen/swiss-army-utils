@@ -10,7 +10,7 @@ export interface Dependencies<
   InitDependencies extends Record<string, any>,
   AsyncDependencies extends Record<string, any>,
 > {
-  getDependencies: () => InitDependencies;
+  getSyncDependencies: () => InitDependencies;
   getAsyncDependencies: () => Promise<AsyncDependencies>;
   loadAllDependencies(): Promise<InitDependencies & AsyncDependencies>;
 }
@@ -23,7 +23,7 @@ export interface DependencyContainer<
     NewInitDependencies extends Record<string, any>,
     NewAsyncDependencies extends Record<string, any>,
   >(options: {
-    createDependencies?: (
+    createSyncDependencies?: (
       container: Dependencies<InitDependencies, AsyncDependencies>
     ) => NewInitDependencies;
     createAsyncDependencies?: (
@@ -36,18 +36,18 @@ export interface DependencyContainer<
 }
 
 export function createDependencyContainer<
-  InitDependencies extends Record<string, any> = EmptyObject,
+  SyncDependencies extends Record<string, any> = EmptyObject,
   AsyncDependencies extends Record<string, any> = EmptyObject,
 >({
-  createDependencies,
+  createSyncDependencies,
   createAsyncDependencies,
 }: {
-  createDependencies?: () => InitDependencies;
+  createSyncDependencies?: () => SyncDependencies;
   createAsyncDependencies?: () => Promise<AsyncDependencies>;
-}): DependencyContainer<InitDependencies, AsyncDependencies> {
+}): DependencyContainer<SyncDependencies, AsyncDependencies> {
   return {
-    getDependencies: createSingletonSync({
-      getValue: createDependencies ?? (() => ({}) as InitDependencies),
+    getSyncDependencies: createSingletonSync({
+      getValue: createSyncDependencies ?? (() => ({}) as SyncDependencies),
       isValid: () => true,
     }),
     getAsyncDependencies: createSingletonAsync<AsyncDependencies>({
@@ -56,11 +56,11 @@ export function createDependencyContainer<
         (() => Promise.resolve({} as AsyncDependencies)),
       isValid: () => true,
     }),
-    extend({ createDependencies, createAsyncDependencies }) {
+    extend({ createSyncDependencies, createAsyncDependencies }) {
       return createDependencyContainer({
-        createDependencies: () => ({
-          ...this.getDependencies(),
-          ...(createDependencies?.(this) as any),
+        createSyncDependencies: () => ({
+          ...this.getSyncDependencies(),
+          ...(createSyncDependencies?.(this) as any),
         }),
         createAsyncDependencies: async () => ({
           ...((await createAsyncDependencies?.(this)) as any),
@@ -69,7 +69,7 @@ export function createDependencyContainer<
       });
     },
     async loadAllDependencies() {
-      const syncDeps = this.getDependencies();
+      const syncDeps = this.getSyncDependencies();
       const asyncDeps = await this.getAsyncDependencies();
       return { ...syncDeps, ...asyncDeps };
     },
