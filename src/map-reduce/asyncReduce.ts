@@ -2,10 +2,10 @@
  * Asynchronously reduces an array to a single value using an async reducer function.
  * The reduction is performed sequentially, processing one item at a time.
  *
- * @param items - The array to reduce.
- * @param reducer - Async function that combines the accumulator with each item.
- * @param initialResult - The initial value for the accumulator.
- * @returns A promise that resolves to the final accumulated result.
+ * @param {Item[]} items - The array to reduce.
+ * @param {function} reducer - Async function that combines the accumulator with each item.
+ * @param {Result} initialResult - The initial value for the accumulator.
+ * @returns {Promise<Result>} A promise that resolves to the final accumulated result.
  *
  * @example
  * ```ts

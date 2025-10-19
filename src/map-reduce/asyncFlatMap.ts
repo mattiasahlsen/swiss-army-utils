@@ -5,9 +5,9 @@ import { asyncMap } from './asyncMap.js';
  * Equivalent to calling asyncMap followed by Array.flat().
  * The mapping is performed sequentially to maintain order.
  *
- * @param array - The array or async iterable to map over.
- * @param mapper - Async function that transforms each item. Receives the item and its index.
- * @returns A promise that resolves to a flattened array of mapped results.
+ * @param {T[] | AsyncIterable<T>} array - The array or async iterable to map over.
+ * @param {function} mapper - Async function that transforms each item. Receives the item and its index.
+ * @returns {Promise<Array>} A promise that resolves to a flattened array of mapped results.
  *
  * @example
  * ```ts

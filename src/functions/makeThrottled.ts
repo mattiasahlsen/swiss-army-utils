@@ -5,10 +5,10 @@ import { sleep } from './sleep.js';
  * Multiple calls made during the delay period will share the same promise and return the same result.
  * After the delay period, subsequent calls will trigger a new execution.
  *
- * @param options - Configuration object.
- * @param options.minDelay - Minimum delay in milliseconds between function executions.
- * @param fn - The function to throttle. Can be synchronous or asynchronous.
- * @returns A throttled function that returns a promise. If multiple calls are made within the delay period,
+ * @param {Object} options - Configuration object.
+ * @param {number} options.minDelay - Minimum delay in milliseconds between function executions.
+ * @param {function} fn - The function to throttle. Can be synchronous or asynchronous.
+ * @returns {function} A throttled function that returns a promise. If multiple calls are made within the delay period,
  *          they will all receive the same promise and result.
  *
  * @example

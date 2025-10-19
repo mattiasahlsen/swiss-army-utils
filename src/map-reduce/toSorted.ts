@@ -2,10 +2,10 @@
  * Sorts an array by a key extracted from each item, returning a new sorted array.
  * The original array is not modified.
  *
- * @param array - The array to sort.
- * @param getKey - Function to extract the sort key from each item.
- * @param order - Sort order, either 'asc' for ascending or 'desc' for descending. Defaults to 'asc'.
- * @returns A new array with the same items sorted by the specified key and order.
+ * @param {T[]} array - The array to sort.
+ * @param {function} getKey - Function to extract the sort key from each item.
+ * @param {string} order - Sort order, either 'asc' for ascending or 'desc' for descending. Defaults to 'asc'.
+ * @returns {T[]} A new array with the same items sorted by the specified key and order.
  *
  * @example
  * ```ts

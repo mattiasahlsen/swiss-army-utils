@@ -3,9 +3,9 @@ import { raise } from '../error/raise.js';
 /**
  * Finds the first item in the array that matches the predicate, throwing an error if no match is found.
  *
- * @param arr - The array to search.
- * @param predicate - Function to test each item. Returns true for the item to be returned.
- * @returns The first item that satisfies the predicate.
+ * @param {T[]} arr - The array to search.
+ * @param {function} predicate - Function to test each item. Returns true for the item to be returned.
+ * @returns {T} The first item that satisfies the predicate.
  * @throws {Error} If no item matches the predicate.
  *
  * @example

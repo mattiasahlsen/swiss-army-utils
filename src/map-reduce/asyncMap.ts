@@ -2,9 +2,9 @@
  * Asynchronously maps over an array or async iterable, applying an async mapper function to each item.
  * The mapping is performed sequentially (not in parallel) to maintain order and avoid overwhelming resources.
  *
- * @param iterator - The array or async iterable to map over.
- * @param mapper - Async function that transforms each item. Receives the item and its index.
- * @returns A promise that resolves to an array of mapped results.
+ * @param {T[] | AsyncIterable<T>} iterator - The array or async iterable to map over.
+ * @param {function} mapper - Async function that transforms each item. Receives the item and its index.
+ * @returns {Promise<R[]>} A promise that resolves to an array of mapped results.
  *
  * @example
  * ```ts

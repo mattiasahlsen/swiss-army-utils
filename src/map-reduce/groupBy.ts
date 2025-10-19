@@ -2,10 +2,10 @@ import { mapObjectFields } from '../object/mapObjectFields.js';
 
 /**
  * Groups the elements of an array based on a key derived from each element.
- * @param array - The array to be grouped.
- * @param getKey - A function that derives the key from each element.
- * @param initialValue - An initial value for the grouped result.
- * @returns An object where each key maps to an array of elements that share that key.
+ * @param {T[]} array - The array to be grouped.
+ * @param {function} getKey - A function that derives the key from each element.
+ * @param {Record<Key, T[]>} initialValue - An initial value for the grouped result.
+ * @returns {Record<Key, T[]>} An object where each key maps to an array of elements that share that key.
  * @example
  * const data = [
  *   { category: 'fruit', name: 'apple' },

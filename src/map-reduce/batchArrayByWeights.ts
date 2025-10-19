@@ -2,10 +2,10 @@
  * Splits an array into smaller arrays (batches) based on weighted sizes.
  * Items are grouped into batches where the total weight doesn't exceed the specified batch size.
  *
- * @param items - The array to split into batches.
- * @param batchSize - The maximum total weight allowed per batch.
- * @param getWeight - Function to calculate the weight of each item.
- * @returns An array of arrays, where each sub-array is a batch with total weight ≤ batchSize.
+ * @param {T[]} items - The array to split into batches.
+ * @param {number} batchSize - The maximum total weight allowed per batch.
+ * @param {function} getWeight - Function to calculate the weight of each item.
+ * @returns {T[][]} An array of arrays, where each sub-array is a batch with total weight ≤ batchSize.
  *
  * @example
  * ```ts

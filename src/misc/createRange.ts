@@ -1,8 +1,8 @@
 /**
  * Creates an array of consecutive integers from 0 to length-1.
  *
- * @param length - The number of elements in the range. Must be non-negative.
- * @returns An array of integers from 0 to length-1.
+ * @param {number} length - The number of elements in the range. Must be non-negative.
+ * @returns {number[]} An array of integers from 0 to length-1.
  * @throws {Error} If length is negative.
  *
  * @example
