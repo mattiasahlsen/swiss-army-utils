@@ -13,15 +13,15 @@
  * batchArrayByWeights(items, 5, item => item.length);
  * // returns [['a', 'bb'], ['ccc'], ['dddd']]
  * // Batch 1: 'a' (1) + 'bb' (2) = 3 ≤ 5
- * // Batch 2: 'ccc' (3) = 3 ≤ 5 
+ * // Batch 2: 'ccc' (3) = 3 ≤ 5
  * // Batch 3: 'dddd' (4) = 4 ≤ 5
  * ```
  */
-export const batchArrayByWeights = <T>(
+export function batchArrayByWeights<T>(
   items: T[],
   batchSize: number,
   getWeight: (item: T) => number
-) => {
+) {
   const batches: T[][] = [];
   let currentBatch: T[] = [];
   let weightInCurrentBatch = 0;
@@ -47,4 +47,4 @@ export const batchArrayByWeights = <T>(
   }
 
   return batches;
-};
+}

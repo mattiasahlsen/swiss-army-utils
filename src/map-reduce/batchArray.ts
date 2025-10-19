@@ -12,10 +12,11 @@ import { batchArrayByWeights } from './batchArrayByWeights.js';
  * ```ts
  * batchArray([1, 2, 3, 4, 5], 2);
  * // returns [[1, 2], [3, 4], [5]]
- * 
+ *
  * batchArray(['a', 'b', 'c'], 3);
  * // returns [['a', 'b', 'c']]
  * ```
  */
-export const batchArray = <T>(array: T[], batchSize: number) =>
-  batchArrayByWeights(array, batchSize, () => 1);
+export function batchArray<T>(array: T[], batchSize: number) {
+  return batchArrayByWeights(array, batchSize, () => 1);
+}

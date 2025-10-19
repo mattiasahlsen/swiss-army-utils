@@ -8,7 +8,7 @@ import { sleep } from './sleep.js';
  * @param options - Configuration object.
  * @param options.minDelay - Minimum delay in milliseconds between function executions.
  * @param fn - The function to throttle. Can be synchronous or asynchronous.
- * @returns A throttled function that returns a promise. If multiple calls are made within the delay period, 
+ * @returns A throttled function that returns a promise. If multiple calls are made within the delay period,
  *          they will all receive the same promise and result.
  *
  * @example
@@ -16,24 +16,24 @@ import { sleep } from './sleep.js';
  * // Throttle an API call to at most once per second
  * const fetchData = () => fetch('/api/data').then(r => r.json());
  * const throttledFetch = makeThrottled({ minDelay: 1000 }, fetchData);
- * 
+ *
  * // First call executes immediately
  * const result1 = await throttledFetch();
- * 
+ *
  * // Calls within 1 second share the same promise
  * const promise2 = throttledFetch();
  * const promise3 = throttledFetch();
  * // promise2 === promise3
- * 
+ *
  * // After 1 second delay, new call triggers another execution
  * await sleep(1100);
  * const result2 = await throttledFetch(); // New execution
  * ```
  */
-export const makeThrottled = <Returned>(
+export function makeThrottled<Returned>(
   { minDelay }: { minDelay: number },
   fn: () => Returned
-): Returned extends Promise<any> ? () => Returned : () => Promise<Returned> => {
+): Returned extends Promise<any> ? () => Returned : () => Promise<Returned> {
   let nextCall: Promise<Returned> | null = null;
   let sleeping: Promise<void> | null = null;
 
@@ -56,4 +56,4 @@ export const makeThrottled = <Returned>(
     });
     return nextCall;
   }) as any;
-};
+}

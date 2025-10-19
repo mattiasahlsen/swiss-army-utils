@@ -15,7 +15,7 @@
  *   return n * 2;
  * });
  * // returns [2, 4, 6]
- * 
+ *
  * // With async iterable
  * async function* generateNumbers() {
  *   yield 1; yield 2; yield 3;
@@ -24,10 +24,10 @@
  * // returns [2, 4, 6]
  * ```
  */
-export const asyncMap = async <T, R>(
+export async function asyncMap<T, R>(
   iterator: readonly T[] | AsyncIterable<T>,
   mapper: (item: T, index: number) => Promise<R>
-): Promise<R[]> => {
+): Promise<R[]> {
   const result: R[] = [];
 
   if (Array.isArray(iterator)) {
@@ -42,4 +42,4 @@ export const asyncMap = async <T, R>(
   }
 
   return result;
-};
+}

@@ -11,11 +11,12 @@ import { raise } from '../error/raise.js';
  * @example
  * ```ts
  * const numbers = [1, 2, 3, 4];
- * 
+ *
  * findOrThrow(numbers, n => n === 2); // returns 2
  * findOrThrow(numbers, n => n > 2); // returns 3
  * findOrThrow(numbers, n => n === 5); // throws Error: Item not found
  * ```
  */
-export const findOrThrow = <T>(arr: T[], predicate: (item: T) => boolean) =>
-  arr.find(predicate) ?? raise('Item not found');
+export function findOrThrow<T>(arr: T[], predicate: (item: T) => boolean) {
+  return arr.find(predicate) ?? raise('Item not found');
+}

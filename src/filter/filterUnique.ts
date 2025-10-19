@@ -2,9 +2,9 @@
  * Filters an array to keep only unique items based on a key extraction function.
  * When duplicate keys are found, the last occurrence is kept.
  *
- * @param items - The array of items to filter.
- * @param getKey - Function that extracts a unique key from each item.
- * @returns An array containing only unique items based on the extracted keys.
+ * @param {T[]} items - The array of items to filter.
+ * @param {function} getKey - Function that extracts a unique key from each item.
+ * @returns {Array<T>} An array containing only unique items based on the extracted keys.
  *
  * @example
  * ```ts
@@ -17,11 +17,11 @@
  * // returns [{ id: '1', name: 'c' }, { id: '2', name: 'b' }]
  * ```
  */
-export const filterUnique = <T>(
+export function filterUnique<T>(
   items: T[],
   getKey: (item: T) => string | number | bigint
-): T[] => {
+): T[] {
   const map = new Map();
   items.forEach((item) => map.set(getKey(item), item));
   return Array.from(map.values());
-};
+}
