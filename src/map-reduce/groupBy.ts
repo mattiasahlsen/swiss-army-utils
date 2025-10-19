@@ -42,6 +42,6 @@ export function groupBy<T, Key extends string>(
       acc[key].push(item);
       return acc;
     },
-    initialValue
+    { ...initialValue }
   );
 }
