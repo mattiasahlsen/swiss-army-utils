@@ -4,9 +4,9 @@ import { batchArrayByWeights } from './batchArrayByWeights.js';
  * Splits an array into smaller arrays (batches) of a specified size.
  * Each batch will contain at most `batchSize` items.
  *
- * @param array - The array to split into batches.
- * @param batchSize - The maximum number of items per batch.
- * @returns An array of arrays, where each sub-array is a batch.
+ * @param {T[]} array - The array to split into batches.
+ * @param {number} batchSize - The maximum number of items per batch.
+ * @returns {T[][]} An array of arrays, where each sub-array is a batch.
  *
  * @example
  * ```ts

@@ -9,9 +9,9 @@ type ArrayContent<I> = I extends (infer U)[] ? ArrayContent<U> : I;
  * The function flattens nested arrays up to 10 levels deep, filters out null/undefined values,
  * and returns a deduplicated array of IDs.
  *
- * @param items - The array of objects to extract IDs from.
- * @param idGetter - Function that extracts the ID(s) from each item. Can return single values or nested arrays.
- * @returns An array of unique, non-null IDs.
+ * @param {T[]} items - The array of objects to extract IDs from.
+ * @param {function} idGetter - Function that extracts the ID(s) from each item. Can return single values or nested arrays.
+ * @returns {Array} An array of unique, non-null IDs.
  *
  * @example
  * ```ts

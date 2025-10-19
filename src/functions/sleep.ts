@@ -2,8 +2,8 @@
  * Asynchronously pauses execution for a specified duration.
  * Returns a promise that resolves after the given number of milliseconds.
  *
- * @param ms - Duration in milliseconds to sleep.
- * @returns A promise that resolves after the specified delay.
+ * @param {number} ms - Duration in milliseconds to sleep.
+ * @returns {Promise<void>} A promise that resolves after the specified delay.
  *
  * @example
  * ```ts

@@ -3,10 +3,10 @@
  * Items are grouped into batches where the total weight doesn't exceed the specified batch size.
  * This is an async generator that yields batches as they are formed.
  *
- * @param items - The async iterable to split into batches.
- * @param batchSize - The maximum total weight allowed per batch.
- * @param getWeight - Function to calculate the weight of each item.
- * @yields Arrays representing batches with total weight ≤ batchSize.
+ * @param {AsyncIterable<T>} items - The async iterable to split into batches.
+ * @param {number} batchSize - The maximum total weight allowed per batch.
+ * @param {function} getWeight - Function to calculate the weight of each item.
+ * @yields {T[]} Arrays representing batches with total weight ≤ batchSize.
  *
  * @example
  * ```ts

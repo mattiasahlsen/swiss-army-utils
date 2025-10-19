@@ -5,10 +5,10 @@ import { isPromise } from 'node:util/types';
  * The cached value is validated before each use and refreshed if invalid.
  * Handles concurrent calls by ensuring only one fetch happens at a time.
  *
- * @param options - Configuration object.
- * @param options.getValue - Function that fetches the value asynchronously.
- * @param options.isValid - Function that checks if the cached value is still valid.
- * @returns A function that returns the singleton value, fetching it if necessary.
+ * @param {Object} options - Configuration object.
+ * @param {function} options.getValue - Function that fetches the value asynchronously.
+ * @param {function} options.isValid - Function that checks if the cached value is still valid.
+ * @returns {function} A function that returns the singleton value, fetching it if necessary.
  * @throws {Error} If the freshly fetched value is invalid.
  *
  * @example
@@ -68,10 +68,10 @@ export function createSingletonAsync<T>({
  * Creates a synchronous singleton that lazily fetches and caches a value.
  * The cached value is validated before each use and refreshed if invalid.
  *
- * @param options - Configuration object.
- * @param options.getValue - Function that fetches the value synchronously.
- * @param options.isValid - Function that checks if the cached value is still valid.
- * @returns A function that returns the singleton value, fetching it if necessary.
+ * @param {Object} options - Configuration object.
+ * @param {function} options.getValue - Function that fetches the value synchronously.
+ * @param {function} options.isValid - Function that checks if the cached value is still valid.
+ * @returns {function} A function that returns the singleton value, fetching it if necessary.
  * @throws {Error} If the freshly fetched value is invalid.
  *
  * @example
@@ -123,9 +123,9 @@ export function createSingletonSync<T>({
  * - if options.isValid returns false for the cached value, obtain and cache a new value via options.getValue().
  *
  * @template T - The type of the singleton value.
- * @param options.getValue - Factory function invoked to create the value when no valid cached value exists.
- * @param options.isValid - Predicate used to determine whether a cached value is still usable. If it returns false, a new value will be created.
- * @returns A function that returns the current singleton value of type T.
+ * @param {function} options.getValue - Factory function invoked to create the value when no valid cached value exists.
+ * @param {function} options.isValid - Predicate used to determine whether a cached value is still usable. If it returns false, a new value will be created.
+ * @returns {function} A function that returns the current singleton value of type T.
  *
  * @remarks
  * - Initialization is lazy: getValue is not called until the returned function is invoked.

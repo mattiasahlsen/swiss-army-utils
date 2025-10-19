@@ -1,9 +1,9 @@
 /**
  * Returns the item at the specified index in the array, throwing an error if the index is out of bounds.
  *
- * @param items - The array to get the item from.
- * @param index - The index of the item to retrieve.
- * @returns The item at the specified index.
+ * @param {T[]} items - The array to get the item from.
+ * @param {number} index - The index of the item to retrieve.
+ * @returns {T} The item at the specified index.
  * @throws {Error} If no item exists at the specified index.
  *
  * @example

@@ -2,8 +2,8 @@
  * Type-level function that ensures the input array is treated as a tuple type.
  * This is useful for preserving exact array literal types.
  *
- * @param arr - The array to treat as a tuple.
- * @returns The same array, but with tuple type preservation.
+ * @param {T} arr - The array to treat as a tuple.
+ * @returns {T} The same array, but with tuple type preservation.
  *
  * @example
  * ```ts

@@ -2,8 +2,8 @@
  * Type guard that checks if a value is neither undefined nor null.
  * This is useful for filtering arrays and narrowing types in TypeScript.
  *
- * @param value - The value to check for being defined.
- * @returns True if the value is not undefined and not null, false otherwise.
+ * @param {T | undefined | null} value - The value to check for being defined.
+ * @returns {boolean} True if the value is not undefined and not null, false otherwise.
  *
  * @example
  * ```ts

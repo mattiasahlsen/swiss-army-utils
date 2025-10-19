@@ -2,8 +2,8 @@
  * Safely converts a string to a number with validation.
  * Throws an error if the string cannot be converted to a valid finite number.
  *
- * @param value - The string to convert to a number.
- * @returns The parsed number.
+ * @param {string} value - The string to convert to a number.
+ * @returns {number} The parsed number.
  * @throws {Error} When the string is empty, not a number, or represents an infinite value.
  *
  * @example

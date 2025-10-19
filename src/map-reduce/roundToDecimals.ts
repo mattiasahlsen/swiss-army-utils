@@ -1,8 +1,8 @@
 /**
  *
- * @param value - The value to round.
- * @param decimals - The number of decimal places to round to.
- * @returns The rounded value.
+ * @param {number} value - The value to round.
+ * @param {number} decimals - The number of decimal places to round to.
+ * @returns {number} The rounded value.
  *
  * @example
  * ```ts

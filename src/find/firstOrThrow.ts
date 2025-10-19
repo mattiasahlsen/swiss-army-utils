@@ -3,8 +3,8 @@ import { indexOrThrow } from './indexOrThrow.js';
 /**
  * Returns the first item in the array, throwing an error if the array is empty.
  *
- * @param items - The array to get the first item from.
- * @returns The first item in the array.
+ * @param {T[]} items - The array to get the first item from.
+ * @returns {T} The first item in the array.
  * @throws {Error} If the array is empty.
  *
  * @example

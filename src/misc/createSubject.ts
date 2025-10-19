@@ -7,8 +7,8 @@ type Handler<TParams> = (params: TParams) => Promise<void> | void;
  * If only one error occurs, throws that error directly.
  * If multiple errors occur, throws an AggregateError.
  *
- * @param handlers - Set of handler functions to call.
- * @param params - Parameters to pass to each handler.
+ * @param {Set<Handler<TParams>>} handlers - Set of handler functions to call.
+ * @param {TParams} params - Parameters to pass to each handler.
  * @throws {Error} The single error if only one handler fails.
  * @throws {AggregateError} If multiple handlers fail.
  */
@@ -40,7 +40,7 @@ async function callInOrderWithErrorHandling<TParams>(
  * Allows subscribers to listen for events and emit events to all subscribers.
  * Handlers are called in order, and all handlers are executed even if some fail.
  *
- * @returns An object with subscribe and emit methods.
+ * @returns {Object} An object with subscribe and emit methods.
  *
  * @example
  * ```ts
@@ -81,8 +81,8 @@ export type Subject<T> = ReturnType<typeof createSubject<T>>;
  * A handler subscribed to the merged subject will receive events from all source subjects.
  * Note: The merged subject cannot emit events, only subscribe to them.
  *
- * @param subjects - Array of subjects to merge.
- * @returns A merged subject with only a subscribe method (no emit).
+ * @param {Subject<THandlerParams>[]} subjects - Array of subjects to merge.
+ * @returns {Object} A merged subject with only a subscribe method (no emit).
  *
  * @example
  * ```ts
