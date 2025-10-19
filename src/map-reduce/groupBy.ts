@@ -35,9 +35,13 @@ export function groupBy<T, Key extends string>(
       if (!acc[key]) {
         acc[key] = [];
       }
+      // Only clone if we're about to modify an array from initialValue
+      if (initialValue[key] && acc[key] === initialValue[key]) {
+        acc[key] = [...acc[key]];
+      }
       acc[key].push(item);
       return acc;
     },
-    mapObjectFields(initialValue, ([key, arr]) => [key, [...arr]])
+    initialValue
   );
 }
