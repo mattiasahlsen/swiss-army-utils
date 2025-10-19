@@ -20,7 +20,7 @@ import { sleep } from 'swiss-army-utils/functions/sleep';
 
 ## API Documentation
 
-## Constants
+### Constants
 
 <dl>
 <dt><a href="#findOrThrow">findOrThrow</a> ⇒</dt>
@@ -87,7 +87,7 @@ Note: The merged subject cannot emit events, only subscribe to them.</p>
 </dd>
 </dl>
 
-## Functions
+### Functions
 
 <dl>
 <dt><a href="#filterUnique">filterUnique(items, getKey)</a> ⇒ <code>Array.&lt;T&gt;</code></dt>
@@ -133,7 +133,7 @@ If multiple errors occur, throws an AggregateError.</p>
 
 <a name="findOrThrow"></a>
 
-## findOrThrow ⇒
+### findOrThrow ⇒
 Finds the first item in the array that matches the predicate, throwing an error if no match is found.
 
 **Kind**: global constant  
@@ -158,7 +158,7 @@ findOrThrow(numbers, n => n === 5); // throws Error: Item not found
 ```
 <a name="firstOrThrow"></a>
 
-## firstOrThrow ⇒
+### firstOrThrow ⇒
 Returns the first item in the array, throwing an error if the array is empty.
 
 **Kind**: global constant  
@@ -181,7 +181,7 @@ firstOrThrow([]); // throws Error: No item found at index 0
 ```
 <a name="indexOrThrow"></a>
 
-## indexOrThrow ⇒
+### indexOrThrow ⇒
 Returns the item at the specified index in the array, throwing an error if the index is out of bounds.
 
 **Kind**: global constant  
@@ -206,7 +206,7 @@ indexOrThrow(items, -1); // throws Error: No item found at index -1
 ```
 <a name="makeThrottled"></a>
 
-## makeThrottled ⇒
+### makeThrottled ⇒
 Creates a throttled version of a function that enforces a minimum delay between executions.
 Multiple calls made during the delay period will share the same promise and return the same result.
 After the delay period, subsequent calls will trigger a new execution.
@@ -241,7 +241,7 @@ const result2 = await throttledFetch(); // New execution
 ```
 <a name="sleep"></a>
 
-## sleep ⇒
+### sleep ⇒
 Asynchronously pauses execution for a specified duration.
 Returns a promise that resolves after the given number of milliseconds.
 
@@ -265,7 +265,7 @@ for (let i = 0; i < 5; i++) {
 ```
 <a name="asyncFlatMap"></a>
 
-## asyncFlatMap ⇒
+### asyncFlatMap ⇒
 Asynchronously maps over an array or async iterable and flattens the results.
 Equivalent to calling asyncMap followed by Array.flat().
 The mapping is performed sequentially to maintain order.
@@ -293,7 +293,7 @@ const letters = await asyncFlatMap(words, async (word, index) => {
 ```
 <a name="asyncMap"></a>
 
-## asyncMap ⇒
+### asyncMap ⇒
 Asynchronously maps over an array or async iterable, applying an async mapper function to each item.
 The mapping is performed sequentially (not in parallel) to maintain order and avoid overwhelming resources.
 
@@ -324,7 +324,7 @@ const result = await asyncMap(generateNumbers(), async (n) => n * 2);
 ```
 <a name="asyncReduce"></a>
 
-## asyncReduce ⇒
+### asyncReduce ⇒
 Asynchronously reduces an array to a single value using an async reducer function.
 The reduction is performed sequentially, processing one item at a time.
 
@@ -360,7 +360,7 @@ const combined = await asyncReduce(
 ```
 <a name="batchArray"></a>
 
-## batchArray ⇒
+### batchArray ⇒
 Splits an array into smaller arrays (batches) of a specified size.
 Each batch will contain at most `batchSize` items.
 
@@ -382,7 +382,7 @@ batchArray(['a', 'b', 'c'], 3);
 ```
 <a name="batchArrayByWeights"></a>
 
-## batchArrayByWeights ⇒
+### batchArrayByWeights ⇒
 Splits an array into smaller arrays (batches) based on weighted sizes.
 Items are grouped into batches where the total weight doesn't exceed the specified batch size.
 
@@ -406,7 +406,7 @@ batchArrayByWeights(items, 5, item => item.length);
 ```
 <a name="batchAsyncIterableByWeights"></a>
 
-## batchAsyncIterableByWeights
+### batchAsyncIterableByWeights
 Asynchronously splits an async iterable into batches based on weighted sizes.
 Items are grouped into batches where the total weight doesn't exceed the specified batch size.
 This is an async generator that yields batches as they are formed.
@@ -432,7 +432,7 @@ for await (const batch of batchAsyncIterableByWeights(generateItems(), 5, item =
 ```
 <a name="pluckIds"></a>
 
-## pluckIds ⇒
+### pluckIds ⇒
 Extracts unique IDs from an array of objects using an ID getter function.
 The function flattens nested arrays up to 10 levels deep, filters out null/undefined values,
 and returns a deduplicated array of IDs.
@@ -467,7 +467,7 @@ pluckIds(users, user => [user.id, user.friendIds]);
 ```
 <a name="createRange"></a>
 
-## createRange ⇒
+### createRange ⇒
 Creates an array of consecutive integers from 0 to length-1.
 
 **Kind**: global constant  
@@ -489,7 +489,7 @@ createRange(-1); // throws Error
 ```
 <a name="createSubject"></a>
 
-## createSubject ⇒
+### createSubject ⇒
 Creates a subject (observable) for event-driven programming.
 Allows subscribers to listen for events and emit events to all subscribers.
 Handlers are called in order, and all handlers are executed even if some fail.
@@ -513,7 +513,7 @@ unsubscribe();
 ```
 <a name="mergeSubjects"></a>
 
-## mergeSubjects ⇒
+### mergeSubjects ⇒
 Merges multiple subjects into a single subscribable subject.
 A handler subscribed to the merged subject will receive events from all source subjects.
 Note: The merged subject cannot emit events, only subscribe to them.
@@ -543,7 +543,7 @@ await subject2.emit('From subject2');
 ```
 <a name="filterUnique"></a>
 
-## filterUnique(items, getKey) ⇒ <code>Array.&lt;T&gt;</code>
+### filterUnique(items, getKey) ⇒ <code>Array.&lt;T&gt;</code>
 Filters an array to keep only unique items based on a key extraction function.
 When duplicate keys are found, the last occurrence is kept.
 
@@ -567,7 +567,7 @@ filterUnique(items, (item) => item.id);
 ```
 <a name="isDefined"></a>
 
-## isDefined(value) ⇒
+### isDefined(value) ⇒
 Type guard that checks if a value is neither undefined nor null.
 This is useful for filtering arrays and narrowing types in TypeScript.
 
@@ -592,7 +592,7 @@ if (isDefined(maybeValue)) {
 ```
 <a name="asTuple"></a>
 
-## asTuple(arr) ⇒
+### asTuple(arr) ⇒
 Type-level function that ensures the input array is treated as a tuple type.
 This is useful for preserving exact array literal types.
 
@@ -610,7 +610,7 @@ const array = [1, 2, 3]; // Type: number[]
 ```
 <a name="groupBy"></a>
 
-## groupBy(array, getKey, initialValue) ⇒
+### groupBy(array, getKey, initialValue) ⇒
 Groups the elements of an array based on a key derived from each element.
 
 **Kind**: global function  
@@ -643,7 +643,7 @@ const grouped = groupBy(data, item => item.category, {});
 ```
 <a name="roundToDecimals"></a>
 
-## roundToDecimals(value, decimals) ⇒
+### roundToDecimals(value, decimals) ⇒
 **Kind**: global function  
 **Returns**: The rounded value.  
 
@@ -661,7 +661,7 @@ roundToDecimals(3.14, 5); // returns 3.14
 ```
 <a name="stringToNumber"></a>
 
-## stringToNumber(value) ⇒
+### stringToNumber(value) ⇒
 Safely converts a string to a number with validation.
 Throws an error if the string cannot be converted to a valid finite number.
 
@@ -687,7 +687,7 @@ stringToNumber('Infinity'); // throws Error: Invalid number: Infinity
 ```
 <a name="toSorted"></a>
 
-## toSorted(array, getKey, order) ⇒
+### toSorted(array, getKey, order) ⇒
 Sorts an array by a key extracted from each item, returning a new sorted array.
 The original array is not modified.
 
@@ -714,7 +714,7 @@ toSorted(users, user => user.age, 'desc');
 ```
 <a name="createSingletonAsync"></a>
 
-## createSingletonAsync(options) ⇒
+### createSingletonAsync(options) ⇒
 Creates an async singleton that lazily fetches and caches a value.
 The cached value is validated before each use and refreshed if invalid.
 Handles concurrent calls by ensuring only one fetch happens at a time.
@@ -750,7 +750,7 @@ const [token3, token4] = await Promise.all([getToken(), getToken()]);
 ```
 <a name="createSingletonSync"></a>
 
-## createSingletonSync(options) ⇒
+### createSingletonSync(options) ⇒
 Creates a synchronous singleton that lazily fetches and caches a value.
 The cached value is validated before each use and refreshed if invalid.
 
@@ -782,7 +782,7 @@ const config2 = getConfig(); // Same config if still valid
 ```
 <a name="callInOrderWithErrorHandling"></a>
 
-## callInOrderWithErrorHandling(handlers, params)
+### callInOrderWithErrorHandling(handlers, params)
 Calls all handlers in order, collecting errors and throwing them at the end.
 If only one error occurs, throws that error directly.
 If multiple errors occur, throws an AggregateError.
@@ -798,6 +798,8 @@ If multiple errors occur, throws an AggregateError.
 | --- | --- |
 | handlers | Set of handler functions to call. |
 | params | Parameters to pass to each handler. |
+
+
 
 ## Development
 
