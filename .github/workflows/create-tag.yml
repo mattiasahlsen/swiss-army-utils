@@ -29,7 +29,7 @@ jobs:
           npm ci
 
       - name: Run CI checks (format check, lint, build, test)
-        run: npm run check
+        run: npm run checks
 
   create-tag:
     runs-on: ubuntu-latest

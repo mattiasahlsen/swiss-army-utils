@@ -31,6 +31,8 @@ import { sleep } from 'swiss-army-utils/functions/sleep';
 - `npm run build` - Build the library
 - `npm run format` - Format code with Prettier
 - `npm run updateReadme` - Generate README documentation from JSDoc comments
+- `npm run checks` - Check format, run lint, tests and build
+- `npm run dev` - Format files, lint, test, build and regenerate README file
 
 ### Publish new version of npm package
 
