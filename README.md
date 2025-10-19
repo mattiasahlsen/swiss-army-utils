@@ -804,7 +804,13 @@ await subject2.emit('From subject2');
 - `npm run lint` - Lint the source code
 - `npm run build` - Build the library
 - `npm run format` - Format code with Prettier
-- `npm run docs` - Generate README documentation from JSDoc comments
+- `npm run updateReadme` - Generate README documentation from JSDoc comments
+
+### Publish new version of npm package
+
+- Run `npm version [patch | minor | major]`
+- Run `npm publish --dry-run` and verify output
+- Run `npm publish`
 
 ### Design Principles
 

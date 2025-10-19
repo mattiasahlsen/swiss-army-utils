@@ -1,5 +1,5 @@
 export const raise = (error: Error | string): never => {
-  if (typeof error === "string") {
+  if (typeof error === 'string') {
     throw new Error(error);
   }
 

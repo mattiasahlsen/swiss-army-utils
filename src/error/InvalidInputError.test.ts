@@ -52,10 +52,10 @@ describe('InvalidInputError', () => {
   test('can be distinguished from other BaseError instances', () => {
     const baseError = new BaseError('Base error');
     const invalidInputError = new InvalidInputError('Invalid input error');
-    
+
     expect(baseError).toBeInstanceOf(BaseError);
     expect(baseError).not.toBeInstanceOf(InvalidInputError);
-    
+
     expect(invalidInputError).toBeInstanceOf(BaseError);
     expect(invalidInputError).toBeInstanceOf(InvalidInputError);
   });

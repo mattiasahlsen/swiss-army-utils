@@ -1,0 +1,38 @@
+name: Tag on PR Merge
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.15.x'
+
+      - name: Get package version
+        id: get_version
+        run: echo "PACKAGE_VERSION=v$(npm pkg get version | tr -d \" )" >> $GITHUB_ENV
+
+      - name: Create Git Tag
+        run: |
+          if [ $(git tag -l "${{ env.PACKAGE_VERSION }}") ]; then
+            echo "Tag ${{ env.PACKAGE_VERSION }} already exists. Skipping tag creation."
+          else
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git tag "${{ env.PACKAGE_VERSION }}"
+            git push origin "${{ env.PACKAGE_VERSION }}"
+          fi
