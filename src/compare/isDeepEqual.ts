@@ -1,11 +1,11 @@
 import { type IsEqual } from 'type-fest';
 
-export const isDeepEqual = <T, U>(
+export function isDeepEqual<T, U>(
   a: T,
   b: U
-): IsEqual<T, U> extends true ? boolean : void => {
+): IsEqual<T, U> extends true ? boolean : void {
   return _isDeepEqual(a, b) as any;
-};
+}
 
 function _isDeepEqual(a: any, b: any): boolean {
   if (a === b) return true;

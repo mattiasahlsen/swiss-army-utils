@@ -9,13 +9,13 @@
  * @example
  * ```ts
  * const items = ['a', 'b', 'c'];
- * 
+ *
  * indexOrThrow(items, 1); // returns 'b'
  * indexOrThrow(items, 3); // throws Error: No item found at index 3
  * indexOrThrow(items, -1); // throws Error: No item found at index -1
  * ```
  */
-export const indexOrThrow = <T>(items: T[], index: number): T => {
+export function indexOrThrow<T>(items: T[], index: number): T {
   const item = items[index];
 
   if (item === undefined) {
@@ -23,4 +23,4 @@ export const indexOrThrow = <T>(items: T[], index: number): T => {
   }
 
   return item;
-};
+}

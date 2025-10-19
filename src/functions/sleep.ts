@@ -9,7 +9,7 @@
  * ```ts
  * // Sleep for 1 second
  * await sleep(1000);
- * 
+ *
  * // Use in a loop with delays
  * for (let i = 0; i < 5; i++) {
  *   console.log(i);
@@ -17,6 +17,6 @@
  * }
  * ```
  */
-export const sleep = async (ms: number) => {
+export function sleep(ms: number): Promise<void> {
   return new Promise<void>((resolve) => setTimeout(resolve, ms));
-};
+}

@@ -13,14 +13,14 @@
  * async function* generateItems() {
  *   yield 'a'; yield 'bb'; yield 'ccc'; yield 'dddd';
  * }
- * 
+ *
  * for await (const batch of batchAsyncIterableByWeights(generateItems(), 5, item => item.length)) {
  *   console.log(batch);
  * }
  * // Outputs: ['a', 'bb'], ['ccc'], ['dddd']
  * ```
  */
-export const batchAsyncIterableByWeights = async function* <T>(
+export async function* batchAsyncIterableByWeights<T>(
   items: AsyncIterable<T>,
   batchSize: number,
   getWeight: (item: T) => number
@@ -47,4 +47,4 @@ export const batchAsyncIterableByWeights = async function* <T>(
   if (currentBatch.length > 0) {
     yield currentBatch;
   }
-};
+}

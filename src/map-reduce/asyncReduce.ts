@@ -19,7 +19,7 @@
  *   0
  * );
  * // returns 10
- * 
+ *
  * const words = ['hello', 'world'];
  * const combined = await asyncReduce(
  *   words,
@@ -29,14 +29,14 @@
  * // returns ' hello world'
  * ```
  */
-export const asyncReduce = async <Item, Result>(
+export async function asyncReduce<Item, Result>(
   items: Item[],
   reducer: (result: Result, item: Item) => Promise<Result>,
   initialResult: Result
-): Promise<Result> => {
+): Promise<Result> {
   let result = initialResult;
   for (const item of items) {
     result = await reducer(result, item);
   }
   return result;
-};
+}

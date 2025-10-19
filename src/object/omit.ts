@@ -1,7 +1,7 @@
-export const omit = <T extends object, const K extends keyof T & string>(
+export function omit<T extends object, const K extends keyof T & string>(
   obj: T,
   ...keys: (K | K[])[]
-): Omit<T, K> => {
+): Omit<T, K> {
   const keySet = new Set<string>(keys.flat());
   const result: any = {};
 
@@ -12,4 +12,4 @@ export const omit = <T extends object, const K extends keyof T & string>(
   }
 
   return result;
-};
+}

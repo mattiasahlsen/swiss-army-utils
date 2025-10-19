@@ -20,25 +20,25 @@ type ArrayContent<I> = I extends (infer U)[] ? ArrayContent<U> : I;
  *   { id: 2, friendIds: [1] },
  *   { id: 3, friendIds: [1, 2] }
  * ];
- * 
+ *
  * // Extract user IDs
  * pluckIds(users, user => user.id);
  * // returns [1, 2, 3]
- * 
+ *
  * // Extract friend IDs (flattened and deduplicated)
  * pluckIds(users, user => user.friendIds);
  * // returns [2, 3, 1]
- * 
+ *
  * // Extract both user ID and friend IDs
  * pluckIds(users, user => [user.id, user.friendIds]);
  * // returns [1, 2, 3]
  * ```
  */
-export const pluckIds = <T, I>(
+export function pluckIds<T, I>(
   items: T[],
   idGetter: (item: T) => I
-): NonNullable<ArrayContent<I>>[] => {
+): NonNullable<ArrayContent<I>>[] {
   const ids = items.map(idGetter).flat(10).filter(isDefined);
 
   return [...new Set(ids)] as NonNullable<ArrayContent<I>>[];
-};
+}

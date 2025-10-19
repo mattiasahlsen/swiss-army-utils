@@ -17,16 +17,16 @@ import { asyncMap } from './asyncMap.js';
  *   return word.split('');
  * });
  * // returns ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd']
- * 
+ *
  * // Without asyncFlatMap, you'd need:
  * // const mapped = await asyncMap(words, mapper);
  * // const flattened = mapped.flat();
  * ```
  */
-export const asyncFlatMap = async <T, R>(
+export async function asyncFlatMap<T, R>(
   array: T[] | AsyncIterable<T>,
   mapper: (item: T, index: number) => Promise<R>
-) => {
+) {
   const result = await asyncMap(array, mapper);
   return result.flat();
-};
+}
