@@ -8,6 +8,9 @@ on:
 env:
   NODE_VERSION: '22.15.1' # set this to the node version to use (e.g. '8.x', '10.x', '12.x')
 
+permissions:
+  contents: read
+
 jobs:
   lint-build-test:
     runs-on: ubuntu-latest
