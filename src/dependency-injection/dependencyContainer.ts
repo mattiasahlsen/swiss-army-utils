@@ -1,6 +1,6 @@
 import type { EmptyObject } from 'type-fest';
 import {
-  createSingleton,
+  createSingletonAsync,
   createSingletonSync,
 } from '../misc/createSingleton.js';
 
@@ -50,7 +50,7 @@ export function createDependencyContainer<
       getValue: createDependencies ?? (() => ({}) as InitDependencies),
       isValid: () => true,
     }),
-    getAsyncDependencies: createSingleton<AsyncDependencies>({
+    getAsyncDependencies: createSingletonAsync<AsyncDependencies>({
       getValue:
         createAsyncDependencies ??
         (() => Promise.resolve({} as AsyncDependencies)),
