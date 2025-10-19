@@ -2,6 +2,16 @@ import { firstOrThrow } from '../find/firstOrThrow.js';
 
 type Handler<TParams> = (params: TParams) => Promise<void> | void;
 
+/**
+ * Calls all handlers in order, collecting errors and throwing them at the end.
+ * If only one error occurs, throws that error directly.
+ * If multiple errors occur, throws an AggregateError.
+ * 
+ * @param handlers - Set of handler functions to call.
+ * @param params - Parameters to pass to each handler.
+ * @throws {Error} The single error if only one handler fails.
+ * @throws {AggregateError} If multiple handlers fail.
+ */
 const callInOrderWithErrorHandling = async <TParams>(
   handlers: Set<Handler<TParams>>,
   params: TParams
@@ -25,6 +35,29 @@ const callInOrderWithErrorHandling = async <TParams>(
   }
 };
 
+/**
+ * Creates a subject (observable) for event-driven programming.
+ * Allows subscribers to listen for events and emit events to all subscribers.
+ * Handlers are called in order, and all handlers are executed even if some fail.
+ * 
+ * @returns An object with subscribe and emit methods.
+ * 
+ * @example
+ * ```ts
+ * const subject = createSubject<string>();
+ * 
+ * // Subscribe to events
+ * const unsubscribe = subject.subscribe(async (message) => {
+ *   console.log('Received:', message);
+ * });
+ * 
+ * // Emit events to all subscribers
+ * await subject.emit('Hello, world!');
+ * 
+ * // Unsubscribe when done
+ * unsubscribe();
+ * ```
+ */
 export const createSubject = <THandlerParams>() => {
   const listeners = new Set<Handler<THandlerParams>>();
 
@@ -43,6 +76,31 @@ export const createSubject = <THandlerParams>() => {
 
 export type Subject<T> = ReturnType<typeof createSubject<T>>;
 
+/**
+ * Merges multiple subjects into a single subscribable subject.
+ * A handler subscribed to the merged subject will receive events from all source subjects.
+ * Note: The merged subject cannot emit events, only subscribe to them.
+ * 
+ * @param subjects - Array of subjects to merge.
+ * @returns A merged subject with only a subscribe method (no emit).
+ * 
+ * @example
+ * ```ts
+ * const subject1 = createSubject<string>();
+ * const subject2 = createSubject<string>();
+ * 
+ * const merged = mergeSubjects([subject1, subject2]);
+ * 
+ * // Subscribe once to receive events from both subjects
+ * merged.subscribe((message) => {
+ *   console.log('Received from any subject:', message);
+ * });
+ * 
+ * await subject1.emit('From subject1');
+ * await subject2.emit('From subject2');
+ * // Both messages are received by the merged subscriber
+ * ```
+ */
 export const mergeSubjects = <THandlerParams>(
   subjects: Subject<THandlerParams>[]
 ): Omit<Subject<THandlerParams>, 'emit'> => {

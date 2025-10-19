@@ -1,3 +1,17 @@
+/**
+ * Creates an array of consecutive integers from 0 to length-1.
+ * 
+ * @param length - The number of elements in the range. Must be non-negative.
+ * @returns An array of integers from 0 to length-1.
+ * @throws {Error} If length is negative.
+ * 
+ * @example
+ * ```ts
+ * createRange(5); // returns [0, 1, 2, 3, 4]
+ * createRange(0); // returns []
+ * createRange(-1); // throws Error
+ * ```
+ */
 export const createRange = (length: number) => {
   if (length < 0) {
     throw new Error("Length must be a positive number");
