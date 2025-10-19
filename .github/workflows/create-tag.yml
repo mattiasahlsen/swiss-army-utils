@@ -26,10 +26,10 @@ jobs:
 
       - name: Install project
         run: |
-          npm install
+          npm ci
 
       - name: Run CI checks (format check, lint, build, test)
-        run: npm run ci
+        run: npm run check
 
   create-tag:
     runs-on: ubuntu-latest
