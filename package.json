@@ -4,7 +4,7 @@
   "description": "General typescript utils.",
   "type": "module",
   "workspaces": [
-    "examples/*"
+    "examples/node-typescript"
   ],
   "files": [
     "dist"
