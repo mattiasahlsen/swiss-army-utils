@@ -14,7 +14,7 @@
  */
 export function createRange(length: number): number[] {
   if (length < 0) {
-    throw new Error('Length must be a positive number');
+    throw new Error('Length must be a non-negative number');
   }
 
   if (!Number.isInteger(length)) {

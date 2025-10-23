@@ -18,7 +18,7 @@
  */
 export function stringToNumber(value: string): number {
   if (value.trim() === '') {
-    throw new Error(`Invalid number: ${value}`);
+    throw new Error('Invalid number: empty string');
   }
 
   const parsedValue = Number(value);

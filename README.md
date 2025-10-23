@@ -20,9 +20,61 @@ import { sleep } from 'swiss-army-utils/functions/sleep';
 
 ## API Documentation
 
+### Classes
+
+<dl>
+<dt><a href="#BaseError">BaseError</a> ⇐ <code>Error</code></dt>
+<dd><p>Base error class that all custom errors in this library extend from.
+Provides a flag to identify errors from this library.</p>
+</dd>
+<dt><a href="#InvalidInputError">InvalidInputError</a> ⇐ <code><a href="#BaseError">BaseError</a></code></dt>
+<dd><p>Error class for invalid input errors.
+Extends BaseError to provide a specific error type for input validation failures.</p>
+</dd>
+<dt><a href="#TimeoutError">TimeoutError</a> ⇐ <code>Error</code></dt>
+<dd><p>Error class for timeout operations.
+Automatically generates a detailed message with timing information.</p>
+</dd>
+</dl>
+
+### Constants
+
+<dl>
+<dt><a href="#raise">raise</a> ⇒ <code>never</code></dt>
+<dd><p>Throws an error immediately. Useful for inline error throwing in expressions.
+Accepts either an Error object or a string message.</p>
+</dd>
+<dt><a href="#booleanAsStringSchema">booleanAsStringSchema</a> : <code>z.ZodSchema.&lt;boolean&gt;</code></dt>
+<dd><p>Zod schema that parses boolean values from string representations.
+Accepts &#39;true&#39; or &#39;false&#39; strings and transforms them to actual boolean values.</p>
+</dd>
+<dt><a href="#nonEmptyStringSchema">nonEmptyStringSchema</a> : <code>z.ZodSchema.&lt;string&gt;</code></dt>
+<dd><p>Zod schema that validates strings are not empty (have at least 1 character).
+Useful for required string fields in forms and APIs.</p>
+</dd>
+<dt><a href="#numberAsStringSchema">numberAsStringSchema</a> : <code>z.ZodSchema.&lt;number&gt;</code></dt>
+<dd><p>Zod schema that parses number values from string representations.
+Uses stringToNumber for validation and transformation.</p>
+</dd>
+</dl>
+
 ### Functions
 
 <dl>
+<dt><a href="#isDeepEqual">isDeepEqual(a, b)</a> ⇒ <code>boolean</code> | <code>void</code></dt>
+<dd><p>Performs a deep equality comparison between two values.
+Handles arrays, objects, dates, regular expressions, and primitive values.
+Type-safe: only returns boolean when types match, otherwise returns void.</p>
+</dd>
+<dt><a href="#createDependencyContainer">createDependencyContainer(options)</a> ⇒ <code>DependencyContainer.&lt;SyncDependencies, AsyncDependencies&gt;</code></dt>
+<dd><p>Creates a dependency injection container for managing application dependencies.
+Supports both synchronous and asynchronous dependencies with lazy initialization.
+Containers can be extended to add new dependencies while maintaining type safety.</p>
+</dd>
+<dt><a href="#getErrorMessage">getErrorMessage(error)</a> ⇒ <code>string</code></dt>
+<dd><p>Extracts an error message from an unknown error value.
+Handles Error objects, strings, objects, and other types gracefully.</p>
+</dd>
 <dt><a href="#filterUnique">filterUnique(items, getKey)</a> ⇒ <code>Array.&lt;T&gt;</code></dt>
 <dd><p>Filters an array to keep only unique items based on a key extraction function.
 When duplicate keys are found, the last occurrence is kept.</p>
@@ -124,8 +176,198 @@ Handlers are called in order, and all handlers are executed even if some fail.</
 A handler subscribed to the merged subject will receive events from all source subjects.
 Note: The merged subject cannot emit events, only subscribe to them.</p>
 </dd>
+<dt><a href="#filterObjectFields">filterObjectFields(object, filter)</a> ⇒ <code>Record.&lt;string, Value&gt;</code></dt>
+<dd><p>Creates a new object containing only the entries that pass the filter function.
+The filter function receives both the value and key for each entry.</p>
+</dd>
+<dt><a href="#mapObjectFields">mapObjectFields(obj, mapFn)</a> ⇒ <code>Record.&lt;string, TResult&gt;</code></dt>
+<dd><p>Transforms an object by mapping over its key-value pairs.
+The mapping function receives each key-value pair as a tuple and returns a new tuple.</p>
+</dd>
+<dt><a href="#omit">omit(obj, ...keys)</a> ⇒ <code>Object</code></dt>
+<dd><p>Creates a new object by excluding specified keys from an existing object.
+Returns a copy of the object without the omitted properties.</p>
+</dd>
+<dt><a href="#pick">pick(obj, keys)</a> ⇒ <code>Object</code></dt>
+<dd><p>Creates a new object by picking specified keys from an existing object.
+Only includes properties that exist in the source object.</p>
+</dd>
 </dl>
 
+<a name="BaseError"></a>
+
+### BaseError ⇐ <code>Error</code>
+Base error class that all custom errors in this library extend from.
+Provides a flag to identify errors from this library.
+
+**Kind**: global class  
+**Extends**: <code>Error</code>  
+<a name="new_BaseError_new"></a>
+
+#### new exports.BaseError()
+**Example**  
+```ts
+class CustomError extends BaseError {}
+
+const err = new CustomError('Something went wrong');
+if (err.isBaseError) {
+  // Handle custom error
+}
+```
+<a name="InvalidInputError"></a>
+
+### InvalidInputError ⇐ [<code>BaseError</code>](#BaseError)
+Error class for invalid input errors.
+Extends BaseError to provide a specific error type for input validation failures.
+
+**Kind**: global class  
+**Extends**: [<code>BaseError</code>](#BaseError)  
+<a name="new_InvalidInputError_new"></a>
+
+#### new exports.InvalidInputError()
+**Example**  
+```ts
+throw new InvalidInputError('User ID must be a positive number');
+```
+<a name="raise"></a>
+
+### raise ⇒ <code>never</code>
+Throws an error immediately. Useful for inline error throwing in expressions.
+Accepts either an Error object or a string message.
+
+**Kind**: global constant  
+**Returns**: <code>never</code> - Never returns (always throws).  
+**Throws**:
+
+- <code>Error</code> Always throws the provided error or creates a new Error from the string.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| error | <code>Error</code> \| <code>string</code> | The error to throw, either an Error object or string message. |
+
+**Example**  
+```ts
+const value = someCondition ? validValue : raise('Invalid condition');
+
+const result = data ?? raise(new Error('Data is required'));
+```
+<a name="booleanAsStringSchema"></a>
+
+### booleanAsStringSchema : <code>z.ZodSchema.&lt;boolean&gt;</code>
+Zod schema that parses boolean values from string representations.
+Accepts 'true' or 'false' strings and transforms them to actual boolean values.
+
+**Kind**: global constant  
+**Example**  
+```ts
+booleanAsStringSchema.parse('true'); // returns true
+booleanAsStringSchema.parse('false'); // returns false
+booleanAsStringSchema.parse('yes'); // throws ZodError
+```
+<a name="nonEmptyStringSchema"></a>
+
+### nonEmptyStringSchema : <code>z.ZodSchema.&lt;string&gt;</code>
+Zod schema that validates strings are not empty (have at least 1 character).
+Useful for required string fields in forms and APIs.
+
+**Kind**: global constant  
+**Example**  
+```ts
+nonEmptyStringSchema.parse('hello'); // returns 'hello'
+nonEmptyStringSchema.parse(''); // throws ZodError with 'This field cannot be empty'
+```
+<a name="numberAsStringSchema"></a>
+
+### numberAsStringSchema : <code>z.ZodSchema.&lt;number&gt;</code>
+Zod schema that parses number values from string representations.
+Uses stringToNumber for validation and transformation.
+
+**Kind**: global constant  
+**Example**  
+```ts
+numberAsStringSchema.parse('123'); // returns 123
+numberAsStringSchema.parse('3.14'); // returns 3.14
+numberAsStringSchema.parse('abc'); // throws ZodError
+```
+<a name="isDeepEqual"></a>
+
+### isDeepEqual(a, b) ⇒ <code>boolean</code> \| <code>void</code>
+Performs a deep equality comparison between two values.
+Handles arrays, objects, dates, regular expressions, and primitive values.
+Type-safe: only returns boolean when types match, otherwise returns void.
+
+**Kind**: global function  
+**Returns**: <code>boolean</code> \| <code>void</code> - True if values are deeply equal, false otherwise. Returns void if types don't match.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| a | <code>T</code> | The first value to compare. |
+| b | <code>U</code> | The second value to compare. |
+
+**Example**  
+```ts
+isDeepEqual({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } }); // returns true
+isDeepEqual([1, 2, 3], [1, 2, 3]); // returns true
+isDeepEqual(new Date('2024-01-01'), new Date('2024-01-01')); // returns true
+isDeepEqual({ a: 1 }, { a: 2 }); // returns false
+```
+<a name="createDependencyContainer"></a>
+
+### createDependencyContainer(options) ⇒ <code>DependencyContainer.&lt;SyncDependencies, AsyncDependencies&gt;</code>
+Creates a dependency injection container for managing application dependencies.
+Supports both synchronous and asynchronous dependencies with lazy initialization.
+Containers can be extended to add new dependencies while maintaining type safety.
+
+**Kind**: global function  
+**Returns**: <code>DependencyContainer.&lt;SyncDependencies, AsyncDependencies&gt;</code> - A dependency container with extend and load capabilities.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| options | <code>Object</code> | Configuration for dependency creation. |
+| options.createSyncDependencies | <code>function</code> | Optional function that creates synchronous dependencies. |
+| options.createAsyncDependencies | <code>function</code> | Optional function that creates asynchronous dependencies. |
+
+**Example**  
+```ts
+const container = createDependencyContainer({
+  createSyncDependencies: () => ({
+    config: { apiUrl: 'https://api.example.com' }
+  }),
+  createAsyncDependencies: async () => ({
+    db: await connectToDatabase()
+  })
+});
+
+const syncDeps = container.getSyncDependencies();
+const allDeps = await container.loadAllDependencies();
+
+const extended = container.extend({
+  createSyncDependencies: (parent) => ({
+    logger: createLogger(parent.getSyncDependencies().config)
+  })
+});
+```
+<a name="getErrorMessage"></a>
+
+### getErrorMessage(error) ⇒ <code>string</code>
+Extracts an error message from an unknown error value.
+Handles Error objects, strings, objects, and other types gracefully.
+
+**Kind**: global function  
+**Returns**: <code>string</code> - A string representation of the error message.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| error | <code>unknown</code> | The error value to extract a message from. |
+
+**Example**  
+```ts
+getErrorMessage(new Error('Something went wrong')); // returns 'Something went wrong'
+getErrorMessage('Error string'); // returns 'Error string'
+getErrorMessage({ code: 404 }); // returns '{"code":404}'
+getErrorMessage(null); // returns 'An unknown error occurred'
+```
 <a name="filterUnique"></a>
 
 ### filterUnique(items, getKey) ⇒ <code>Array.&lt;T&gt;</code>
@@ -793,6 +1035,95 @@ merged.subscribe((message) => {
 await subject1.emit('From subject1');
 await subject2.emit('From subject2');
 // Both messages are received by the merged subscriber
+```
+<a name="filterObjectFields"></a>
+
+### filterObjectFields(object, filter) ⇒ <code>Record.&lt;string, Value&gt;</code>
+Creates a new object containing only the entries that pass the filter function.
+The filter function receives both the value and key for each entry.
+
+**Kind**: global function  
+**Returns**: <code>Record.&lt;string, Value&gt;</code> - A new object with only the filtered entries.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| object | <code>Record.&lt;string, Value&gt;</code> | The object to filter. |
+| filter | <code>function</code> | Function that tests each value and key. Returns true to keep the entry. |
+
+**Example**  
+```ts
+const scores = { alice: 85, bob: 92, charlie: 78, diana: 95 };
+const highScores = filterObjectFields(scores, (score) => score >= 90);
+// returns { bob: 92, diana: 95 }
+
+const startsWithD = filterObjectFields(scores, (_, key) => key.startsWith('d'));
+// returns { diana: 95 }
+```
+<a name="mapObjectFields"></a>
+
+### mapObjectFields(obj, mapFn) ⇒ <code>Record.&lt;string, TResult&gt;</code>
+Transforms an object by mapping over its key-value pairs.
+The mapping function receives each key-value pair as a tuple and returns a new tuple.
+
+**Kind**: global function  
+**Returns**: <code>Record.&lt;string, TResult&gt;</code> - A new object with transformed entries.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>Record.&lt;string, TMapped&gt;</code> | The object to transform. |
+| mapFn | <code>function</code> | Function that maps each [key, value] tuple to a new [key, value] tuple. |
+
+**Example**  
+```ts
+const prices = { apple: 1, banana: 2, orange: 3 };
+const doubled = mapObjectFields(prices, ([key, value]) => [key, value * 2]);
+// returns { apple: 2, banana: 4, orange: 6 }
+
+const prefixed = mapObjectFields(prices, ([key, value]) => [`fruit_${key}`, value]);
+// returns { fruit_apple: 1, fruit_banana: 2, fruit_orange: 3 }
+```
+<a name="omit"></a>
+
+### omit(obj, ...keys) ⇒ <code>Object</code>
+Creates a new object by excluding specified keys from an existing object.
+Returns a copy of the object without the omitted properties.
+
+**Kind**: global function  
+**Returns**: <code>Object</code> - A new object without the specified keys.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>Object</code> | The source object to omit from. |
+| ...keys | <code>string</code> | Keys to omit from the object. Can be provided as separate arguments or arrays. |
+
+**Example**  
+```ts
+const user = { id: 1, name: 'John', email: 'john@example.com', password: 'secret' };
+const publicUser = omit(user, 'password');
+// returns { id: 1, name: 'John', email: 'john@example.com' }
+
+const minimal = omit(user, 'password', 'email');
+// returns { id: 1, name: 'John' }
+```
+<a name="pick"></a>
+
+### pick(obj, keys) ⇒ <code>Object</code>
+Creates a new object by picking specified keys from an existing object.
+Only includes properties that exist in the source object.
+
+**Kind**: global function  
+**Returns**: <code>Object</code> - A new object containing only the specified keys.  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| obj | <code>Object</code> | The source object to pick from. |
+| keys | <code>Array</code> | Array of keys to pick from the object. |
+
+**Example**  
+```ts
+const user = { id: 1, name: 'John', email: 'john@example.com', age: 30 };
+const userSummary = pick(user, ['id', 'name']);
+// returns { id: 1, name: 'John' }
 ```
 
 
