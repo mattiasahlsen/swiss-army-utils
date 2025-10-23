@@ -1,7 +1,7 @@
 {
-  "name": "node-typescript-example",
+  "name": "node-typescript-using-remote-example",
   "version": "1.0.0",
-  "description": "Example project using swiss-army-utils.",
+  "description": "Example project using swiss-army-utils from remote npm registry.",
   "type": "module",
   "private": true,
   "scripts": {
