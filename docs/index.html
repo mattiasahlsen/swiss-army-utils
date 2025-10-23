@@ -1226,7 +1226,7 @@ function roundToDecimals(value, decimals) {
  */
 function stringToNumber(value) {
     if (value.trim() === '') {
-        throw new Error(`Invalid number: ${value}`);
+        throw new Error('Invalid number: empty string');
     }
     const parsedValue = Number(value);
     if (isNaN(parsedValue) || !isFinite(parsedValue)) {
@@ -1291,7 +1291,7 @@ function toSorted(array, getKey, order = 'asc') {
  */
 function createRange(length) {
     if (length < 0) {
-        throw new Error('Length must be a positive number');
+        throw new Error('Length must be a non-negative number');
     }
     if (!Number.isInteger(length)) {
         throw new Error('Length must be an integer');

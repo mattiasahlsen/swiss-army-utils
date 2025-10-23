@@ -8,11 +8,11 @@ describe('stringToNumber', () => {
   });
 
   it('should throw an error for an empty string', () => {
-    expect(() => stringToNumber('')).toThrow('Invalid number: ');
+    expect(() => stringToNumber('')).toThrow('Invalid number: empty string');
   });
 
   it('should throw an error for a string with only spaces', () => {
-    expect(() => stringToNumber('   ')).toThrow('Invalid number:    ');
+    expect(() => stringToNumber('   ')).toThrow('Invalid number: empty string');
   });
 
   it('should throw an error for a non-numeric string', () => {
