@@ -380,8 +380,8 @@
         function testCreateRange() {
             try {
                 const length = parseInt(document.getElementById('createRange-input').value);
-                if (isNaN(length)) {
-                    throw new Error('Length must be a valid integer');
+                if (isNaN(length) || length < 0) {
+                    throw new Error('Length must be a non-negative integer');
                 }
                 const result = createRange(length);
                 displayOutput('createRange-output', 
@@ -448,7 +448,7 @@
             try {
                 const ms = parseInt(document.getElementById('sleep-input').value);
                 if (isNaN(ms) || ms < 0) {
-                    throw new Error('Duration must be a non-negative number');
+                    throw new Error('Duration must be a non-negative integer');
                 }
                 const startTime = Date.now();
                 displayOutput('sleep-output', `Sleeping for ${ms}ms...`);
