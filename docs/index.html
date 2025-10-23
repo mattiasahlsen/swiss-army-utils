@@ -365,6 +365,9 @@
             try {
                 const input = document.getElementById('batchArray-input').value;
                 const size = parseInt(document.getElementById('batchArray-size').value);
+                if (isNaN(size) || size <= 0) {
+                    throw new Error('Batch size must be a positive integer');
+                }
                 const array = parseArray(input);
                 const result = batchArray(array, size);
                 displayOutput('batchArray-output', 
@@ -377,6 +380,9 @@
         function testCreateRange() {
             try {
                 const length = parseInt(document.getElementById('createRange-input').value);
+                if (isNaN(length)) {
+                    throw new Error('Length must be a valid integer');
+                }
                 const result = createRange(length);
                 displayOutput('createRange-output', 
                     `Length: ${length}\nOutput: ${JSON.stringify(result)}`);
@@ -412,6 +418,12 @@
             try {
                 const num = parseFloat(document.getElementById('roundToDecimals-num').value);
                 const decimals = parseInt(document.getElementById('roundToDecimals-decimals').value);
+                if (isNaN(num)) {
+                    throw new Error('Number must be a valid number');
+                }
+                if (isNaN(decimals) || decimals < 0) {
+                    throw new Error('Decimals must be a non-negative integer');
+                }
                 const result = roundToDecimals(num, decimals);
                 displayOutput('roundToDecimals-output', 
                     `Input: ${num}\nDecimals: ${decimals}\nOutput: ${result}`);
@@ -435,6 +447,9 @@
         async function testSleep() {
             try {
                 const ms = parseInt(document.getElementById('sleep-input').value);
+                if (isNaN(ms) || ms < 0) {
+                    throw new Error('Duration must be a non-negative number');
+                }
                 const startTime = Date.now();
                 displayOutput('sleep-output', `Sleeping for ${ms}ms...`);
                 
