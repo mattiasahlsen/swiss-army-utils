@@ -35,6 +35,37 @@ export interface DependencyContainer<
   >;
 }
 
+/**
+ * Creates a dependency injection container for managing application dependencies.
+ * Supports both synchronous and asynchronous dependencies with lazy initialization.
+ * Containers can be extended to add new dependencies while maintaining type safety.
+ *
+ * @param {Object} options - Configuration for dependency creation.
+ * @param {function} options.createSyncDependencies - Optional function that creates synchronous dependencies.
+ * @param {function} options.createAsyncDependencies - Optional function that creates asynchronous dependencies.
+ * @returns {DependencyContainer<SyncDependencies, AsyncDependencies>} A dependency container with extend and load capabilities.
+ *
+ * @example
+ * ```ts
+ * const container = createDependencyContainer({
+ *   createSyncDependencies: () => ({
+ *     config: { apiUrl: 'https://api.example.com' }
+ *   }),
+ *   createAsyncDependencies: async () => ({
+ *     db: await connectToDatabase()
+ *   })
+ * });
+ *
+ * const syncDeps = container.getSyncDependencies();
+ * const allDeps = await container.loadAllDependencies();
+ *
+ * const extended = container.extend({
+ *   createSyncDependencies: (parent) => ({
+ *     logger: createLogger(parent.getSyncDependencies().config)
+ *   })
+ * });
+ * ```
+ */
 export function createDependencyContainer<
   SyncDependencies extends Record<string, any> = EmptyObject,
   AsyncDependencies extends Record<string, any> = EmptyObject,

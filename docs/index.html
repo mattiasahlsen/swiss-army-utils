@@ -177,12 +177,72 @@
     <div class="container">
         <h1>🛠️ Swiss Army Utils</h1>
         <p class="subtitle">Interactive playground for TypeScript utility functions</p>
-        <p>Experiment with 25 utility functions below. Enter your input and see the results instantly!</p>
+        <p>Experiment with 32 utility functions below. Enter your input and see the results instantly!</p>
         <a href="https://github.com/mattiasahlsen/swiss-army-utils" class="github-link" target="_blank">
             View on GitHub →
         </a>
 
         <div class="function-grid">
+
+            <!-- isDeepEqual -->
+            <div class="function-card">
+                <h3>isDeepEqual</h3>
+                <p class="category">compare</p>
+                <p>Performs a deep equality comparison between two values.
+Handles arrays, objects, dates, regular expressions, and primitive values.
+Type-safe: only returns boolean when types match, otherwise returns void.</p>
+                
+            <div class="param">
+                <label>a <span class="type">(T)</span>:</label>
+                <input type="text" id="isDeepEqual-a" placeholder="The first value to compare." value="{ a: 1">
+            </div>
+            <div class="param">
+                <label>b <span class="type">(U)</span>:</label>
+                <input type="text" id="isDeepEqual-b" placeholder="The second value to compare." value="b: { c: 2 } }">
+            </div>
+                <button onclick="test_isDeepEqual()">Test isDeepEqual</button>
+                <div id="isDeepEqual-output" class="output"></div>
+            </div>
+
+            <!-- createDependencyContainer -->
+            <div class="function-card">
+                <h3>createDependencyContainer</h3>
+                <p class="category">dependency-injection</p>
+                <p>Creates a dependency injection container for managing application dependencies.
+Supports both synchronous and asynchronous dependencies with lazy initialization.
+Containers can be extended to add new dependencies while maintaining type safety.</p>
+                
+            <div class="param">
+                <label>options <span class="type">(Object)</span>:</label>
+                <input type="text" id="createDependencyContainer-options" placeholder="Configuration for dependency creation." value="{
+  createSyncDependencies: (">
+            </div>
+            <div class="param">
+                <label>options.createSyncDependencies <span class="type">(function)</span>:</label>
+                <input type="text" id="createDependencyContainer-options.createSyncDependencies" placeholder="Optional function that creates synchronous dependencies." value="">
+            </div>
+            <div class="param">
+                <label>options.createAsyncDependencies <span class="type">(function)</span>:</label>
+                <input type="text" id="createDependencyContainer-options.createAsyncDependencies" placeholder="Optional function that creates asynchronous dependencies." value="">
+            </div>
+                <button onclick="test_createDependencyContainer()">Test createDependencyContainer</button>
+                <div id="createDependencyContainer-output" class="output"></div>
+            </div>
+
+            <!-- getErrorMessage -->
+            <div class="function-card">
+                <h3>getErrorMessage</h3>
+                <p class="category">error</p>
+                <p>Extracts an error message from an unknown error value.
+Handles Error objects, strings, objects, and other types gracefully.</p>
+                
+            <div class="param">
+                <label>error <span class="type">(unknown)</span>:</label>
+                <input type="text" id="getErrorMessage-error" placeholder="The error value to extract a message from." value="new Error(Something went wrong">
+            </div>
+                <button onclick="test_getErrorMessage()">Test getErrorMessage</button>
+                <div id="getErrorMessage-output" class="output"></div>
+            </div>
 
             <!-- filterUnique -->
             <div class="function-card">
@@ -657,11 +717,179 @@ Note: The merged subject cannot emit events, only subscribe to them.</p>
                 <button onclick="test_mergeSubjects()">Test mergeSubjects</button>
                 <div id="mergeSubjects-output" class="output"></div>
             </div>
+
+            <!-- filterObjectFields -->
+            <div class="function-card">
+                <h3>filterObjectFields</h3>
+                <p class="category">object</p>
+                <p>Creates a new object containing only the entries that pass the filter function.
+The filter function receives both the value and key for each entry.</p>
+                
+            <div class="param">
+                <label>object <span class="type">(Record.<string, Value>)</span>:</label>
+                <input type="text" id="filterObjectFields-object" placeholder="The object to filter." value="scores">
+            </div>
+            <div class="param">
+                <label>filter <span class="type">(function)</span>:</label>
+                <input type="text" id="filterObjectFields-filter" placeholder="Function that tests each value and key. Returns true to keep the entry." value="(score">
+            </div>
+                <button onclick="test_filterObjectFields()">Test filterObjectFields</button>
+                <div id="filterObjectFields-output" class="output"></div>
+            </div>
+
+            <!-- mapObjectFields -->
+            <div class="function-card">
+                <h3>mapObjectFields</h3>
+                <p class="category">object</p>
+                <p>Transforms an object by mapping over its key-value pairs.
+The mapping function receives each key-value pair as a tuple and returns a new tuple.</p>
+                
+            <div class="param">
+                <label>obj <span class="type">(Record.<string, TMapped>)</span>:</label>
+                <input type="text" id="mapObjectFields-obj" placeholder="The object to transform." value="prices">
+            </div>
+            <div class="param">
+                <label>mapFn <span class="type">(function)</span>:</label>
+                <input type="text" id="mapObjectFields-mapFn" placeholder="Function that maps each [key, value] tuple to a new [key, value] tuple." value="([key">
+            </div>
+                <button onclick="test_mapObjectFields()">Test mapObjectFields</button>
+                <div id="mapObjectFields-output" class="output"></div>
+            </div>
+
+            <!-- omit -->
+            <div class="function-card">
+                <h3>omit</h3>
+                <p class="category">object</p>
+                <p>Creates a new object by excluding specified keys from an existing object.
+Returns a copy of the object without the omitted properties.</p>
+                
+            <div class="param">
+                <label>obj <span class="type">(Object)</span>:</label>
+                <input type="text" id="omit-obj" placeholder="The source object to omit from." value="user">
+            </div>
+            <div class="param">
+                <label>keys <span class="type">(string)</span>:</label>
+                <input type="text" id="omit-keys" placeholder="Keys to omit from the object. Can be provided as separate arguments or arrays." value="password">
+            </div>
+                <button onclick="test_omit()">Test omit</button>
+                <div id="omit-output" class="output"></div>
+            </div>
+
+            <!-- pick -->
+            <div class="function-card">
+                <h3>pick</h3>
+                <p class="category">object</p>
+                <p>Creates a new object by picking specified keys from an existing object.
+Only includes properties that exist in the source object.</p>
+                
+            <div class="param">
+                <label>obj <span class="type">(Object)</span>:</label>
+                <input type="text" id="pick-obj" placeholder="The source object to pick from." value="user">
+            </div>
+            <div class="param">
+                <label>keys <span class="type">(Array)</span>:</label>
+                <input type="text" id="pick-keys" placeholder="Array of keys to pick from the object." value="['id'">
+            </div>
+                <button onclick="test_pick()">Test pick</button>
+                <div id="pick-output" class="output"></div>
+            </div>
         </div>
     </div>
 
     <script>
         // Utility function implementations (embedded from source)
+        // isDeepEqual
+        /**
+ * Performs a deep equality comparison between two values.
+ * Handles arrays, objects, dates, regular expressions, and primitive values.
+ * Type-safe: only returns boolean when types match, otherwise returns void.
+ *
+ * @param {T} a - The first value to compare.
+ * @param {U} b - The second value to compare.
+ * @returns {boolean | void} True if values are deeply equal, false otherwise. Returns void if types don't match.
+ *
+ * @example
+ * ```ts
+ * isDeepEqual({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } }); // returns true
+ * isDeepEqual([1, 2, 3], [1, 2, 3]); // returns true
+ * isDeepEqual(new Date('2024-01-01'), new Date('2024-01-01')); // returns true
+ * isDeepEqual({ a: 1 }, { a: 2 }); // returns false
+ * ```
+ */
+function isDeepEqual(a, b) {
+    return _isDeepEqual(a, b);
+}
+function _isDeepEqual(a, b) {
+    if (a === b)
+        return true;
+    if (Number.isNaN(a) && Number.isNaN(b))
+        return true;
+    if (typeof a !== 'object' || typeof b !== 'object')
+        return false;
+    if (Array.isArray(a) !== Array.isArray(b))
+        return false;
+    if (Array.isArray(a)) {
+        if (a.length !== b.length)
+            return false;
+        for (let i = 0; i < a.length; i++) {
+            if (!_isDeepEqual(a[i], b[i]))
+                return false;
+        }
+        return true;
+    }
+    if (a instanceof Date && b instanceof Date) {
+        return (a.getTime() === b.getTime() &&
+            a.getTimezoneOffset() === b.getTimezoneOffset());
+    }
+    if (a instanceof RegExp && b instanceof RegExp) {
+        return a.source === b.source && a.flags === b.flags;
+    }
+    if (a.constructor !== b.constructor)
+        return false;
+    const keysA = Object.keys(a);
+    const keysB = Object.keys(b);
+    if (keysA.length !== keysB.length)
+        return false;
+    for (const key of keysA) {
+        if (!_isDeepEqual(a[key], b[key]))
+            return false;
+    }
+    return true;
+}
+
+
+        // createDependencyContainer - source not found
+
+        // getErrorMessage
+        /**
+ * Extracts an error message from an unknown error value.
+ * Handles Error objects, strings, objects, and other types gracefully.
+ *
+ * @param {unknown} error - The error value to extract a message from.
+ * @returns {string} A string representation of the error message.
+ *
+ * @example
+ * ```ts
+ * getErrorMessage(new Error('Something went wrong')); // returns 'Something went wrong'
+ * getErrorMessage('Error string'); // returns 'Error string'
+ * getErrorMessage({ code: 404 }); // returns '{"code":404}'
+ * getErrorMessage(null); // returns 'An unknown error occurred'
+ * ```
+ */
+function getErrorMessage(error) {
+    if (error instanceof Error) {
+        return error.message;
+    }
+    else if (typeof error === 'string') {
+        return error;
+    }
+    else if (typeof error === 'object' && error !== null) {
+        return JSON.stringify(error);
+    }
+    return 'An unknown error occurred';
+}
+
+
         // filterUnique
         /**
  * Filters an array to keep only unique items based on a key extraction function.
@@ -1408,6 +1636,118 @@ function mergeSubjects(subjects) {
 
         // mergeSubjects - source not found
 
+        // filterObjectFields
+        /**
+ * Creates a new object containing only the entries that pass the filter function.
+ * The filter function receives both the value and key for each entry.
+ *
+ * @param {Record<string, Value>} object - The object to filter.
+ * @param {function} filter - Function that tests each value and key. Returns true to keep the entry.
+ * @returns {Record<string, Value>} A new object with only the filtered entries.
+ *
+ * @example
+ * ```ts
+ * const scores = { alice: 85, bob: 92, charlie: 78, diana: 95 };
+ * const highScores = filterObjectFields(scores, (score) => score >= 90);
+ * // returns { bob: 92, diana: 95 }
+ *
+ * const startsWithD = filterObjectFields(scores, (_, key) => key.startsWith('d'));
+ * // returns { diana: 95 }
+ * ```
+ */
+function filterObjectFields(object, filter) {
+    const filteredObject = {};
+    for (const key in object) {
+        if (filter(object[key], key)) {
+            filteredObject[key] = object[key];
+        }
+    }
+    return filteredObject;
+}
+
+
+        // mapObjectFields
+        /**
+ * Transforms an object by mapping over its key-value pairs.
+ * The mapping function receives each key-value pair as a tuple and returns a new tuple.
+ *
+ * @param {Record<string, TMapped>} obj - The object to transform.
+ * @param {function} mapFn - Function that maps each [key, value] tuple to a new [key, value] tuple.
+ * @returns {Record<string, TResult>} A new object with transformed entries.
+ *
+ * @example
+ * ```ts
+ * const prices = { apple: 1, banana: 2, orange: 3 };
+ * const doubled = mapObjectFields(prices, ([key, value]) => [key, value * 2]);
+ * // returns { apple: 2, banana: 4, orange: 6 }
+ *
+ * const prefixed = mapObjectFields(prices, ([key, value]) => [`fruit_${key}`, value]);
+ * // returns { fruit_apple: 1, fruit_banana: 2, fruit_orange: 3 }
+ * ```
+ */
+function mapObjectFields(obj, mapFn) {
+    return Object.fromEntries(Object.entries(obj).map(mapFn));
+}
+
+
+        // omit
+        /**
+ * Creates a new object by excluding specified keys from an existing object.
+ * Returns a copy of the object without the omitted properties.
+ *
+ * @param {Object} obj - The source object to omit from.
+ * @param {...string} keys - Keys to omit from the object. Can be provided as separate arguments or arrays.
+ * @returns {Object} A new object without the specified keys.
+ *
+ * @example
+ * ```ts
+ * const user = { id: 1, name: 'John', email: 'john@example.com', password: 'secret' };
+ * const publicUser = omit(user, 'password');
+ * // returns { id: 1, name: 'John', email: 'john@example.com' }
+ *
+ * const minimal = omit(user, 'password', 'email');
+ * // returns { id: 1, name: 'John' }
+ * ```
+ */
+function omit(obj, ...keys) {
+    const keySet = new Set(keys.flat());
+    const result = {};
+    for (const key in obj) {
+        if (!keySet.has(key)) {
+            result[key] = obj[key];
+        }
+    }
+    return result;
+}
+
+
+        // pick
+        /**
+ * Creates a new object by picking specified keys from an existing object.
+ * Only includes properties that exist in the source object.
+ *
+ * @param {Object} obj - The source object to pick from.
+ * @param {Array} keys - Array of keys to pick from the object.
+ * @returns {Object} A new object containing only the specified keys.
+ *
+ * @example
+ * ```ts
+ * const user = { id: 1, name: 'John', email: 'john@example.com', age: 30 };
+ * const userSummary = pick(user, ['id', 'name']);
+ * // returns { id: 1, name: 'John' }
+ * ```
+ */
+function pick(obj, keys) {
+    const result = {};
+    for (const key of keys) {
+        if (key in obj) {
+            result[key] = obj[key];
+        }
+    }
+    return result;
+}
+
+
         function displayOutput(elementId, content, isError = false) {
             const element = document.getElementById(elementId);
             element.textContent = content;
@@ -1415,6 +1755,52 @@ function mergeSubjects(subjects) {
         }
 
         // Test functions
+
+        function test_isDeepEqual() {
+            try {
+                const a = document.getElementById('isDeepEqual-a').value;
+                const b = document.getElementById('isDeepEqual-b').value;
+                const result = isDeepEqual(a, b);
+                if (result && typeof result.then === 'function') {
+                    result.then(r => {
+                        displayOutput('isDeepEqual-output', 
+                            `Input: ${JSON.stringify({ a, b })}\nOutput: ${JSON.stringify(r)}`);
+                    }).catch(e => {
+                        displayOutput('isDeepEqual-output', `Error: ${e.message}`, true);
+                    });
+                } else {
+                    displayOutput('isDeepEqual-output', 
+                        `Input: ${JSON.stringify({ a, b })}\nOutput: ${JSON.stringify(result)}`);
+                }
+            } catch (e) {
+                displayOutput('isDeepEqual-output', `Error: ${e.message}`, true);
+            }
+        }
+
+        function test_createDependencyContainer() {
+            displayOutput('createDependencyContainer-output', 
+                'This function requires complex parameters. Please see the documentation and examples above.', false);
+        }
+
+        function test_getErrorMessage() {
+            try {
+                const error = document.getElementById('getErrorMessage-error').value;
+                const result = getErrorMessage(error);
+                if (result && typeof result.then === 'function') {
+                    result.then(r => {
+                        displayOutput('getErrorMessage-output', 
+                            `Input: ${JSON.stringify({ error })}\nOutput: ${JSON.stringify(r)}`);
+                    }).catch(e => {
+                        displayOutput('getErrorMessage-output', `Error: ${e.message}`, true);
+                    });
+                } else {
+                    displayOutput('getErrorMessage-output', 
+                        `Input: ${JSON.stringify({ error })}\nOutput: ${JSON.stringify(result)}`);
+                }
+            } catch (e) {
+                displayOutput('getErrorMessage-output', `Error: ${e.message}`, true);
+            }
+        }
 
         function test_filterUnique() {
             displayOutput('filterUnique-output', 
@@ -1722,6 +2108,58 @@ function mergeSubjects(subjects) {
                 }
             } catch (e) {
                 displayOutput('mergeSubjects-output', `Error: ${e.message}`, true);
+            }
+        }
+
+        function test_filterObjectFields() {
+            displayOutput('filterObjectFields-output', 
+                'This function requires complex parameters. Please see the documentation and examples above.', false);
+        }
+
+        function test_mapObjectFields() {
+            displayOutput('mapObjectFields-output', 
+                'This function requires complex parameters. Please see the documentation and examples above.', false);
+        }
+
+        function test_omit() {
+            try {
+                const obj = JSON.parse(document.getElementById('omit-obj').value);
+                const keys = document.getElementById('omit-keys').value;
+                const result = omit(obj, keys);
+                if (result && typeof result.then === 'function') {
+                    result.then(r => {
+                        displayOutput('omit-output', 
+                            `Input: ${JSON.stringify({ obj, keys })}\nOutput: ${JSON.stringify(r)}`);
+                    }).catch(e => {
+                        displayOutput('omit-output', `Error: ${e.message}`, true);
+                    });
+                } else {
+                    displayOutput('omit-output', 
+                        `Input: ${JSON.stringify({ obj, keys })}\nOutput: ${JSON.stringify(result)}`);
+                }
+            } catch (e) {
+                displayOutput('omit-output', `Error: ${e.message}`, true);
+            }
+        }
+
+        function test_pick() {
+            try {
+                const obj = JSON.parse(document.getElementById('pick-obj').value);
+                const keys = JSON.parse(document.getElementById('pick-keys').value);
+                const result = pick(obj, keys);
+                if (result && typeof result.then === 'function') {
+                    result.then(r => {
+                        displayOutput('pick-output', 
+                            `Input: ${JSON.stringify({ obj, keys })}\nOutput: ${JSON.stringify(r)}`);
+                    }).catch(e => {
+                        displayOutput('pick-output', `Error: ${e.message}`, true);
+                    });
+                } else {
+                    displayOutput('pick-output', 
+                        `Input: ${JSON.stringify({ obj, keys })}\nOutput: ${JSON.stringify(result)}`);
+                }
+            } catch (e) {
+                displayOutput('pick-output', `Error: ${e.message}`, true);
             }
         }
     </script>
