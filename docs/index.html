@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Army Utils - Interactive Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .function-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .function-card {
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 20px;
+            background: #f9fafb;
+            transition: all 0.3s ease;
+        }
+
+        .function-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .function-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .function-card p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 10px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #5568d3;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .output {
+            margin-top: 15px;
+            padding: 12px;
+            background: #f0f4f8;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            min-height: 40px;
+        }
+
+        .output.error {
+            background: #fee;
+            border-left-color: #e53e3e;
+            color: #c53030;
+        }
+
+        .output.success {
+            background: #e6fffa;
+            border-left-color: #38b2ac;
+            color: #234e52;
+        }
+
+        .github-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .github-link:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            background: #f0f4f8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛠️ Swiss Army Utils</h1>
+        <p class="subtitle">Interactive playground for TypeScript utility functions</p>
+        <p>Experiment with various utility functions below. Enter your input and see the results instantly!</p>
+        <a href="https://github.com/mattiasahlsen/swiss-army-utils" class="github-link" target="_blank">
+            View on GitHub →
+        </a>
+
+        <div class="function-grid">
+            <!-- isDefined -->
+            <div class="function-card">
+                <h3>isDefined</h3>
+                <p>Filters out null and undefined values from an array</p>
+                <label>Input (comma-separated, use 'null' or 'undefined' for those values):</label>
+                <input type="text" id="isDefined-input" placeholder="1, null, 2, undefined, 3" value="1, null, 2, undefined, 3">
+                <button onclick="testIsDefined()">Test isDefined</button>
+                <div id="isDefined-output" class="output"></div>
+            </div>
+
+            <!-- batchArray -->
+            <div class="function-card">
+                <h3>batchArray</h3>
+                <p>Splits an array into smaller batches of a specified size</p>
+                <label>Array (comma-separated):</label>
+                <input type="text" id="batchArray-input" placeholder="1, 2, 3, 4, 5" value="1, 2, 3, 4, 5">
+                <label>Batch size:</label>
+                <input type="number" id="batchArray-size" placeholder="2" value="2">
+                <button onclick="testBatchArray()">Test batchArray</button>
+                <div id="batchArray-output" class="output"></div>
+            </div>
+
+            <!-- createRange -->
+            <div class="function-card">
+                <h3>createRange</h3>
+                <p>Creates an array of consecutive integers from 0 to length-1</p>
+                <label>Length:</label>
+                <input type="number" id="createRange-input" placeholder="5" value="5">
+                <button onclick="testCreateRange()">Test createRange</button>
+                <div id="createRange-output" class="output"></div>
+            </div>
+
+            <!-- filterUnique -->
+            <div class="function-card">
+                <h3>filterUnique</h3>
+                <p>Filters an array to keep only unique items</p>
+                <label>Input (comma-separated):</label>
+                <input type="text" id="filterUnique-input" placeholder="a, b, c, a, d, b" value="a, b, c, a, d, b">
+                <button onclick="testFilterUnique()">Test filterUnique</button>
+                <div id="filterUnique-output" class="output"></div>
+            </div>
+
+            <!-- stringToNumber -->
+            <div class="function-card">
+                <h3>stringToNumber</h3>
+                <p>Safely converts a string to a number with validation</p>
+                <label>Input string:</label>
+                <input type="text" id="stringToNumber-input" placeholder="123.45" value="123.45">
+                <button onclick="testStringToNumber()">Test stringToNumber</button>
+                <div id="stringToNumber-output" class="output"></div>
+            </div>
+
+            <!-- roundToDecimals -->
+            <div class="function-card">
+                <h3>roundToDecimals</h3>
+                <p>Rounds a number to a specified number of decimal places</p>
+                <label>Number:</label>
+                <input type="number" id="roundToDecimals-num" placeholder="3.14159" value="3.14159" step="0.00001">
+                <label>Decimal places:</label>
+                <input type="number" id="roundToDecimals-decimals" placeholder="2" value="2">
+                <button onclick="testRoundToDecimals()">Test roundToDecimals</button>
+                <div id="roundToDecimals-output" class="output"></div>
+            </div>
+
+            <!-- groupBy -->
+            <div class="function-card">
+                <h3>groupBy</h3>
+                <p>Groups array elements by a key</p>
+                <label>Input (JSON array of objects with 'category' field):</label>
+                <textarea id="groupBy-input" placeholder='[{"category":"fruit","name":"apple"},{"category":"vegetable","name":"carrot"}]'>[{"category":"fruit","name":"apple"},{"category":"vegetable","name":"carrot"},{"category":"fruit","name":"banana"}]</textarea>
+                <button onclick="testGroupBy()">Test groupBy</button>
+                <div id="groupBy-output" class="output"></div>
+            </div>
+
+            <!-- sleep (async demo) -->
+            <div class="function-card">
+                <h3>sleep</h3>
+                <p>Pauses execution for a specified duration (async)</p>
+                <label>Duration (milliseconds):</label>
+                <input type="number" id="sleep-input" placeholder="1000" value="1000">
+                <button onclick="testSleep()">Test sleep</button>
+                <div id="sleep-output" class="output"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Utility functions (simplified versions)
+        function isDefined(value) {
+            return value !== undefined && value !== null;
+        }
+
+        function batchArray(array, batchSize) {
+            const result = [];
+            for (let i = 0; i < array.length; i += batchSize) {
+                result.push(array.slice(i, i + batchSize));
+            }
+            return result;
+        }
+
+        function createRange(length) {
+            if (length < 0) {
+                throw new Error('Length must be a positive number');
+            }
+            if (!Number.isInteger(length)) {
+                throw new Error('Length must be an integer');
+            }
+            return Array.from({ length }, (_, i) => i);
+        }
+
+        function filterUnique(items, getKey = (item) => item) {
+            const seen = new Map();
+            for (let i = items.length - 1; i >= 0; i--) {
+                const key = getKey(items[i]);
+                if (!seen.has(key)) {
+                    seen.set(key, items[i]);
+                }
+            }
+            return Array.from(seen.values()).reverse();
+        }
+
+        function stringToNumber(value) {
+            if (value === '') {
+                throw new Error('Invalid number: ');
+            }
+            const num = Number(value);
+            if (isNaN(num) || !isFinite(num)) {
+                throw new Error(`Invalid number: ${value}`);
+            }
+            return num;
+        }
+
+        function roundToDecimals(value, decimals) {
+            const multiplier = Math.pow(10, decimals);
+            return Math.round(value * multiplier) / multiplier;
+        }
+
+        function groupBy(array, getKey) {
+            const result = {};
+            for (const item of array) {
+                const key = getKey(item);
+                if (!result[key]) {
+                    result[key] = [];
+                }
+                result[key].push(item);
+            }
+            return result;
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Helper function to parse input
+        function parseArray(input) {
+            return input.split(',').map(item => {
+                item = item.trim();
+                if (item === 'null') return null;
+                if (item === 'undefined') return undefined;
+                if (!isNaN(item) && item !== '') return Number(item);
+                return item;
+            });
+        }
+
+        function displayOutput(elementId, content, isError = false) {
+            const element = document.getElementById(elementId);
+            element.textContent = content;
+            element.className = 'output ' + (isError ? 'error' : 'success');
+        }
+
+        // Test functions
+        function testIsDefined() {
+            try {
+                const input = document.getElementById('isDefined-input').value;
+                const array = parseArray(input);
+                const result = array.filter(isDefined);
+                displayOutput('isDefined-output', 
+                    `Input: ${JSON.stringify(array)}\nOutput: ${JSON.stringify(result)}`);
+            } catch (e) {
+                displayOutput('isDefined-output', `Error: ${e.message}`, true);
+            }
+        }
+
+        function testBatchArray() {
+            try {
+                const input = document.getElementById('batchArray-input').value;
+                const size = parseInt(document.getElementById('batchArray-size').value);
+                const array = parseArray(input);
+                const result = batchArray(array, size);
+                displayOutput('batchArray-output', 
+                    `Input: ${JSON.stringify(array)}\nBatch size: ${size}\nOutput: ${JSON.stringify(result)}`);
+            } catch (e) {
+                displayOutput('batchArray-output', `Error: ${e.message}`, true);
+            }
+        }
+
+        function testCreateRange() {
+            try {
+                const length = parseInt(document.getElementById('createRange-input').value);
+                const result = createRange(length);
+                displayOutput('createRange-output', 
+                    `Length: ${length}\nOutput: ${JSON.stringify(result)}`);
+            } catch (e) {
+                displayOutput('createRange-output', `Error: ${e.message}`, true);
+            }
+        }
+
+        function testFilterUnique() {
+            try {
+                const input = document.getElementById('filterUnique-input').value;
+                const array = parseArray(input);
+                const result = filterUnique(array);
+                displayOutput('filterUnique-output', 
+                    `Input: ${JSON.stringify(array)}\nOutput: ${JSON.stringify(result)}`);
+            } catch (e) {
+                displayOutput('filterUnique-output', `Error: ${e.message}`, true);
+            }
+        }
+
+        function testStringToNumber() {
+            try {
+                const input = document.getElementById('stringToNumber-input').value;
+                const result = stringToNumber(input);
+                displayOutput('stringToNumber-output', 
+                    `Input: "${input}"\nOutput: ${result}\nType: ${typeof result}`);
+            } catch (e) {
+                displayOutput('stringToNumber-output', `Error: ${e.message}`, true);
+            }
+        }
+
+        function testRoundToDecimals() {
+            try {
+                const num = parseFloat(document.getElementById('roundToDecimals-num').value);
+                const decimals = parseInt(document.getElementById('roundToDecimals-decimals').value);
+                const result = roundToDecimals(num, decimals);
+                displayOutput('roundToDecimals-output', 
+                    `Input: ${num}\nDecimals: ${decimals}\nOutput: ${result}`);
+            } catch (e) {
+                displayOutput('roundToDecimals-output', `Error: ${e.message}`, true);
+            }
+        }
+
+        function testGroupBy() {
+            try {
+                const input = document.getElementById('groupBy-input').value;
+                const array = JSON.parse(input);
+                const result = groupBy(array, item => item.category);
+                displayOutput('groupBy-output', 
+                    `Input: ${JSON.stringify(array, null, 2)}\nOutput: ${JSON.stringify(result, null, 2)}`);
+            } catch (e) {
+                displayOutput('groupBy-output', `Error: ${e.message}`, true);
+            }
+        }
+
+        async function testSleep() {
+            try {
+                const ms = parseInt(document.getElementById('sleep-input').value);
+                const startTime = Date.now();
+                displayOutput('sleep-output', `Sleeping for ${ms}ms...`);
+                
+                await sleep(ms);
+                
+                const elapsed = Date.now() - startTime;
+                displayOutput('sleep-output', 
+                    `Requested: ${ms}ms\nActual elapsed time: ${elapsed}ms\n✓ Sleep completed!`);
+            } catch (e) {
+                displayOutput('sleep-output', `Error: ${e.message}`, true);
+            }
+        }
+    </script>
+</body>
+</html>
