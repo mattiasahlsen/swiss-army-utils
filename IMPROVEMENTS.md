@@ -12,6 +12,9 @@ This document outlines potential enhancements to improve code quality, performan
 - [New Utility Functions](#new-utility-functions)
 - [Build & Tooling](#build--tooling)
 - [API Design](#api-design)
+- [Security](#security)
+- [Community & Ecosystem](#community--ecosystem)
+- [Migration & Compatibility](#migration--compatibility)
 
 ## Code Quality & Type Safety
 
