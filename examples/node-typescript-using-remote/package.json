@@ -9,7 +9,7 @@
     "start": "node dist/main.js"
   },
   "dependencies": {
-    "swiss-army-utils": "*"
+    "swiss-army-utils": "0.8.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
